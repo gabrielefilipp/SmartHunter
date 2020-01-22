@@ -7,6 +7,20 @@ namespace SmartHunter.Game.Config
         public Dictionary<string, MonsterConfig> Monsters = new Dictionary<string, MonsterConfig>()
         {
             {
+                "em080_01",
+                new MonsterConfig("LOC_MONSTER_ACIDIC_GLAVENUS",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_FRONT_LEG"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                    },
+                    2372.44f, 1f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },{
                 "em063_00",
                 new MonsterConfig("LOC_MONSTER_BRACHYDIOS",
                     new MonsterPartConfig[]
