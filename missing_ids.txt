@@ -1,0 +1,12 @@
+https://github.com/Ezekial711/MonsterHunterWorldModding/wiki/Monster-IDs
+
+em011 Yian garuga swaped with Kirin ?
+em018 (Kirin) not defined 
+
+to add :
+em032_01 brute tigrex
+em042_00 barioth
+em080_00 glavenus
+em118_?? bazelgeuse variant
+em122_00 beotodus
+em124_00 velkhana
