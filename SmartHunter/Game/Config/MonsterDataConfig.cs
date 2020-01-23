@@ -20,7 +20,23 @@ namespace SmartHunter.Game.Config
                     2372.44f, 1f,
                     new MonsterCrownConfig(CrownPreset.Standard)
                 )
-            },{
+            },
+            {
+                "em115_05",
+                new MonsterConfig("LOC_MONSTER_BLACKVEIL_VAAL_HAZAK",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BACK"),
+                        new MonsterPartConfig("Part", "LOC_PART_FRONT_LEG"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                    },
+                    2095.4f, 1f,
+                    new MonsterCrownConfig(CrownPreset.Alternate)
+                )
+            },
+            {
                 "em063_00",
                 new MonsterConfig("LOC_MONSTER_BRACHYDIOS",
                     new MonsterPartConfig[]

@@ -25,6 +25,7 @@ namespace SmartHunter.Config
             { "LOC_MONSTER_PUKEI_PUKEI_CORAL", "Coral Pukei-Pukei" },
             { "LOC_MONSTER_BRACHYDIOS", "Brachydios" },
             { "LOC_MONSTER_ACIDIC_GLAVENUS", "Acidic Glavenus" },
+            { "LOC_MONSTER_BLACKVEIL_VAAL_HAZAK", "Blackveil Vaal Hazak" },
 
             //{ "LOC_MONSTER_UKNOWN", "Unknown Monster" },
             { "LOC_MONSTER_UKNOWN", "DIO BRANDO" },
