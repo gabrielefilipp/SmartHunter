@@ -28,10 +28,11 @@ namespace SmartHunter.Game.Helpers
             public static class Monster
             {
                 // Doubly linked list
-                public static readonly ulong PreviousMonsterPtr = 0x28;
-                public static readonly ulong NextMonsterPtr = 0x30;
+                public static readonly ulong MonsterStartOfStructOffset = 0x40;
+                public static readonly ulong NextMonsterOffset = 0x18;
+                public static readonly ulong MonsterHealthComponentOffset = 0x7670;
+                public static readonly ulong PreviousMonsterOffset = 0x10;
                 public static readonly ulong SizeScale = 0x180;
-                public static readonly ulong ModelPtr = 0x290;
                 public static readonly ulong PartCollection = 0x14528;
                 public static readonly ulong RemovablePartCollection = PartCollection + 0x1ED0;
                 public static readonly ulong StatusEffectCollection = 0x19900;
@@ -39,8 +40,8 @@ namespace SmartHunter.Game.Helpers
 
             public static class MonsterModel
             {
-                public static readonly int IdLength = 64;
-                public static readonly ulong Id = 0x0C;
+                public static readonly int IdLength = 32; // 64?
+                public static readonly ulong IdOffset = 0x179;
             }
 
             public static class MonsterHealthComponent
@@ -52,7 +53,6 @@ namespace SmartHunter.Game.Helpers
             public static class MonsterPartCollection
             {
                 public static readonly int MaxItemCount = 16;
-                public static readonly ulong HealthComponentPtr = 0x48;
                 public static readonly ulong FirstPart = 0x50;
             }
 
@@ -61,7 +61,7 @@ namespace SmartHunter.Game.Helpers
                 public static readonly ulong MaxHealth = 0x0C;
                 public static readonly ulong CurrentHealth = 0x10;
                 public static readonly ulong TimesBrokenCount = 0x18;
-                public static readonly ulong NextPart = 0x3F0;//0x1E8;
+                public static readonly ulong NextPart = 0x1F8;//0x3F0;
             }
 
             public static class MonsterRemovablePartCollection
@@ -255,13 +255,20 @@ namespace SmartHunter.Game.Helpers
 
             List<ulong> monsterAddresses = new List<ulong>();
 
-            ulong firstMonster = monsterBaseList + 0x40;//MemoryHelper.Read<ulong>(process, monsterBaseList + 0x40 + 0x18);
+            ulong firstMonster = MemoryHelper.Read<ulong>(process, monsterBaseList + DataOffsets.Monster.PreviousMonsterOffset);
+
+            if (firstMonster == 0x0)
+            {
+                firstMonster = monsterBaseList;// + DataOffsets.Monster.MonsterStartOfStructOffset;
+            }
+
+            firstMonster += DataOffsets.Monster.MonsterStartOfStructOffset;
 
             ulong currentMonsterAddress = firstMonster;
             while (currentMonsterAddress != 0)
             {
                 monsterAddresses.Insert(0, currentMonsterAddress);
-                currentMonsterAddress = MemoryHelper.Read<ulong>(process, currentMonsterAddress + 0x18);
+                currentMonsterAddress = MemoryHelper.Read<ulong>(process, currentMonsterAddress + DataOffsets.Monster.NextMonsterOffset);
             }
 
             List<Monster> updatedMonsters = new List<Monster>();
@@ -286,13 +293,10 @@ namespace SmartHunter.Game.Helpers
         {
             Monster monster = null;
 
-            //ulong modelPtr = MemoryHelper.Read<ulong>(process, monsterAddress + DataOffsets.Monster.ModelPtr);
-            //string id = MemoryHelper.ReadString(process, modelPtr + DataOffsets.MonsterModel.Id, (uint)DataOffsets.MonsterModel.IdLength);
-
-            ulong tmp = monsterAddress + 0x40 + 0x7670;
+            ulong tmp = monsterAddress + DataOffsets.Monster.MonsterStartOfStructOffset + DataOffsets.Monster.MonsterHealthComponentOffset;
             ulong health_component = MemoryHelper.Read<ulong>(process, tmp);
             
-            string id = MemoryHelper.ReadString(process, tmp + 0x179, 32);
+            string id = MemoryHelper.ReadString(process, tmp + DataOffsets.MonsterModel.IdOffset, (uint)DataOffsets.MonsterModel.IdLength);
             float maxHealth = MemoryHelper.Read<float>(process, health_component + DataOffsets.MonsterHealthComponent.MaxHealth);
 
             if (String.IsNullOrEmpty(id))
@@ -312,12 +316,54 @@ namespace SmartHunter.Game.Helpers
             }
 
             float currentHealth = MemoryHelper.Read<float>(process, health_component + DataOffsets.MonsterHealthComponent.CurrentHealth);
-            float sizeScale = MemoryHelper.Read<float>(process, monsterAddress + DataOffsets.Monster.SizeScale + 0x40);
+            float sizeScale = MemoryHelper.Read<float>(process, monsterAddress + DataOffsets.Monster.MonsterStartOfStructOffset + DataOffsets.Monster.SizeScale);
 
             monster = OverlayViewModel.Instance.MonsterWidget.Context.UpdateAndGetMonster(monsterAddress, id, maxHealth, currentHealth, sizeScale);
 
+            
             if (SmartHunter.Game.Helpers.ConfigHelper.MonsterData.Values.Monsters.ContainsKey(id) && SmartHunter.Game.Helpers.ConfigHelper.MonsterData.Values.Monsters[id].Parts.Count() > 0)
             {
+                /*
+                 * If you reading this then problably you can try to help me.
+                 * This is a first step into monster status effects reading, so far i know:
+                 * 1)Status effects are structs with length of 0x240
+                 * 2)Status duration is at offset 0x1B4
+                 * 3)Max duration ?
+                 * 4)Each struct is double linked -> 0x8 -> base pointer; 0x10 ->previous pointer; 0x18 is next pointer;
+                 * 
+                 * 
+                */
+                /*
+                var p = MemoryHelper.ReadMultiLevelPointer(false, process, monsterAddress + 0xF0, 0x198, 0x0);
+                var p1 = MemoryHelper.ReadMultiLevelPointer(false, process, monsterAddress + 0x10, 0x100, 0x128, 0x0);
+                var p2 = MemoryHelper.ReadMultiLevelPointer(false, process, monsterAddress + 0x10, 0xF8, 0xF8, 0x0);
+                
+
+                var t = MemoryHelper.Read<ulong>(process, monsterAddress + DataOffsets.Monster.MonsterStartOfStructOffset + 0x78);
+                var t1 = MemoryHelper.Read<ulong>(process, t + 0x57A8);
+
+                t1 = MemoryHelper.ReadMultiLevelPointer(false, process, t1 + 0x18, 0x18, 0x0); //With this i can get the base pointer for the status double linked list, my main problem is to identify to which monster this is attached to as every monster points to the same address (for now)
+
+                var wut = MemoryHelper.ReadMultiLevelPointer(false, process, monsterAddress + DataOffsets.Monster.MonsterStartOfStructOffset + 0x78, 0x57A8, 0x18, 0x18, 0x0);
+
+                //Ignore from this line as this was only for testing
+
+                int i = 0;
+
+                ulong t2 = t1 + 0x40;
+                while (t2 != 0)
+                {
+                    if (t2 == 0x1afaa15d0)
+                    {
+                        break;
+                    }
+                    t2 = MemoryHelper.Read<ulong>(process, t2 + DataOffsets.Monster.NextMonsterOffset);
+                    i++;
+                }
+
+                */
+
+                // TODO: I think here we can check if the current player is the host of the party, as if's not there's no point on updating monster parts (cause only the host of the party will see those parts)
                 UpdateMonsterParts(process, monster);
                 UpdateMonsterRemovableParts(process, monster);
                 UpdateMonsterStatusEffects(process, monster);
@@ -347,14 +393,9 @@ namespace SmartHunter.Game.Helpers
 
                     float maxHealth = MemoryHelper.Read<float>(process, currentPartAddress + DataOffsets.MonsterPart.MaxHealth);
 
-                    // Read until we reach an element that has a max health of 0, which is presumably the end of the collection
                     if (maxHealth > 0)
                     {
                         UpdateMonsterPart(process, monster, currentPartAddress);
-                    }
-                    else
-                    {
-                        break;
                     }
                 }
             }
@@ -455,7 +496,7 @@ namespace SmartHunter.Game.Helpers
                 {
                     if (TryParseHex(statusEffectConfig.PointerOffset, out var pointerOffset))
                     {
-                        rootAddress = MemoryHelper.ReadMultiLevelPointer(false, process, (ulong)((long)rootAddress + pointerOffset), 0);
+                        rootAddress = MemoryHelper.Read<ulong>(process, (ulong)((long)rootAddress + pointerOffset));//MemoryHelper.ReadMultiLevelPointer(false, process, (ulong)((long)rootAddress + pointerOffset), 0);
                     }
                 }
                 

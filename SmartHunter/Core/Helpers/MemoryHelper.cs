@@ -119,6 +119,11 @@ namespace SmartHunter.Core.Helpers
                     */
                 }
 
+                if (matchAddresses.Any() && stopAfterFirst)
+                {
+                    break;
+                }
+
                 currentAddress = memoryRegion.BaseAddress + memoryRegion.RegionSize;
             }
 

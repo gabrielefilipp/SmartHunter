@@ -85,8 +85,9 @@ namespace SmartHunter.Core.Helpers
             {
                 using (var client = new WebClient())
                 {
-                    foreach (UpdateNode node in NeedUpdates)
+                    while (NeedUpdates.Count > 0)
                     {
+                        UpdateNode node = NeedUpdates.First();
                         string hash = node.hash;
                         string name = node.fileName;
                         string url = node.downloadUrl;
@@ -103,9 +104,9 @@ namespace SmartHunter.Core.Helpers
                             client.DownloadFile(url, name);
                         }
                         ConfigHelper.Versions.Values.GetType().GetField(nameWithNoExtension).SetValue(ConfigHelper.Versions.Values, hash);
+                        ConfigHelper.Versions.Save();
+                        NeedUpdates.Remove(node);
                     }
-                    ConfigHelper.Versions.Save();
-                    NeedUpdates.Clear();
                 }
             }
             catch

@@ -10,8 +10,16 @@ A complete overlay for Monster Hunter: World on PC. Distributed on [Nexus Mods](
 - Easy localization - create and distribute your own translations for our international friends.
 
 ## Requirements
+
 - Windows.
 - [The latest .NET Framework runtime](https://dotnet.microsoft.com/download/dotnet-framework-runtime).
+
+## How to install
+
+- Download `SmartHunter.exe` and `Newtonsoft.Json.dll` from here https://github.com/gabrielefilipp/SmartHunter/tree/master/SmartHunter/bin/x64/Debug.
+- Place them in a new folder.
+- IMPORTANT: If you are replacing the new `.exe` in the same folder of the old SmartHunter please REMEMBER to delete `Config.json`.
+- You're ready for the hunt.
 
 ## How to use
 
@@ -19,6 +27,12 @@ A complete overlay for Monster Hunter: World on PC. Distributed on [Nexus Mods](
 - Hold `LeftAlt` to view widget locations.
 - Click and drag widgets to move them.
 - Scroll over widgets to rescale them.
+
+## How to update
+
+- Following the commit https://github.com/gabrielefilipp/SmartHunter/commit/305b8a55eb4cd40c31a06a30ab862b4f803baa84 I've added an AutoUpdater module to this Application.
+- To enable this feature just set the key 'AutomaticallyCheckAndDownloadUpdates' to 'true', if present, otherwise just add it, to the file `Config.json`.
+- NOTE that this feature is already active if it's the first time you follow the "How to install" steps and download the mentioned files in a new directory.
 
 ## How to create and use new localizations
 
