@@ -1,5 +1,5 @@
-requiredLabels:
-- :arrow_heading_down: pull
-- ⤵️ pull
-
-requiredBodyRegex: '(^|\\s)Created by pull[bot]. Want to support this open source service? Please star it : )($|\\s)'
+rules:
+- requiredLabels:
+  - :arrow_heading_down: pull
+  - ⤵️ pull
+- requiredBodyRegex: '(^|\\s)Created by pull[bot]. Want to support this open source service? Please star it : )($|\\s)'
