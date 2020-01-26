@@ -1,5 +1,11 @@
 # SmartHunter - Monster Hunter: World Overlay
 
+Build status: <img src="https://ci.appveyor.com/api/projects/status/github/ExterminatorX99/SmartHunter?svg=true">
+
+- [Download 32bit](https://ci.appveyor.com/api/projects/ExterminatorX99/SmartHunter/artifacts/SmartHunter/bin/Release.zip?job=Platform%3A%20Any%20CPU)
+  
+- [Download 64bit](https://ci.appveyor.com/api/projects/ExterminatorX99/SmartHunter/artifacts/SmartHunter/bin/x64/Release.zip?job=Platform%3A%20Any%20CPU)
+
 A complete overlay for Monster Hunter: World on PC. Distributed on [Nexus Mods](https://www.nexusmods.com/monsterhunterworld/mods/793). Features include:
 
 - Monster widget - name, health, parts, status effect buildup, and crown.
