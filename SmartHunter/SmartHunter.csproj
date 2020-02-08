@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <ProjectGuid>{F5F99CEF-1C16-48E6-A88B-1A66D3B53998}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -20,8 +20,6 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-      <PublishTrimmed>true</PublishTrimmed>
-      <PublishReadyToRun>true</PublishReadyToRun>
   </PropertyGroup>
   <Target Name="PostBuild" BeforeTargets="PostBuildEvent">
     <Exec Command="xcopy /E /Y &quot;$(ProjectDir)Ui\Resources&quot; &quot;$(TargetDir)&quot;" />
