@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.IO;
-using System.Security.AccessControl;
 
 namespace SmartHunter.Core
 {
@@ -16,17 +15,14 @@ namespace SmartHunter.Core
             string line = String.Format("[{0:yyyy-MM-dd HH:mm:ss}] {1}", DateTimeOffset.Now.ToUniversalTime(), message);
             Console.WriteLine(line);
 
-            if (LineReceived != null)
-            {
-                LineReceived(null, new GenericEventArgs<string>(line));
-            }
+            LineReceived?.Invoke(null, new GenericEventArgs<string>(line));
 
             bool isDesignInstance = LicenseManager.UsageMode == LicenseUsageMode.Designtime;
             if (!isDesignInstance)
             {
                 try
                 {
-                    using (FileStream fileStream = new FileStream(s_FileName, FileMode.OpenOrCreate, FileSystemRights.AppendData, FileShare.Write, 4096, FileOptions.None))
+                    using (FileStream fileStream = new FileStream(s_FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Write, 4096, FileOptions.None))
                     {
                         using (StreamWriter streamWriter = new StreamWriter(fileStream))
                         {
