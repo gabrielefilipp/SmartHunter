@@ -147,10 +147,10 @@ namespace SmartHunter.Game.Config
 
             // Those unlocky ones are not divisible by 4 Q.Q
 
-            new StatusEffectConfig("Buff", "LOC_STATUS_EFFECT_ARMORSKIN", StatusEffectConfig.MemorySource.Base, null, new MemoryConditionConfig(1, "6D8")),
-            new StatusEffectConfig("Buff", "LOC_STATUS_EFFECT_MEGA_ARMORSKIN", StatusEffectConfig.MemorySource.Base, null, new MemoryConditionConfig(2, "6D8")),
-            new StatusEffectConfig("Buff", "LOC_STATUS_EFFECT_DEMONDRUG", StatusEffectConfig.MemorySource.Base, null, new MemoryConditionConfig(1, "6DE")),
-            new StatusEffectConfig("Buff", "LOC_STATUS_EFFECT_MEGA_DEMONDRUG", StatusEffectConfig.MemorySource.Base, null, new MemoryConditionConfig(2, "6DE")),
+            new StatusEffectConfig("Buff", "LOC_STATUS_EFFECT_DEMONDRUG", StatusEffectConfig.MemorySource.Base, null, new MemoryConditionConfig(1, "6D8")),
+            new StatusEffectConfig("Buff", "LOC_STATUS_EFFECT_MEGA_DEMONDRUG", StatusEffectConfig.MemorySource.Base, null, new MemoryConditionConfig(2, "6D8")),
+            new StatusEffectConfig("Buff", "LOC_STATUS_EFFECT_ARMORSKIN", StatusEffectConfig.MemorySource.Base, null, new MemoryConditionConfig(1, "6DC")),
+            new StatusEffectConfig("Buff", "LOC_STATUS_EFFECT_MEGA_ARMORSKIN", StatusEffectConfig.MemorySource.Base, null, new MemoryConditionConfig(2, "6DC")),
             
             new StatusEffectConfig("Buff", "LOC_STATUS_EFFECT_COOL_DRINK", StatusEffectConfig.MemorySource.Base, indexToHexStrNoOffset(444)),
             new StatusEffectConfig("Buff", "LOC_STATUS_EFFECT_HOT_DRINK", StatusEffectConfig.MemorySource.Base, indexToHexStrNoOffset(445)),
