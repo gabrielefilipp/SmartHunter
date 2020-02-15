@@ -16,6 +16,11 @@ namespace SmartHunter.Core.Helpers
 
         public bool CheckForUpdates(bool forceCheck = false)
         {
+#if DEBUG
+
+            return false;
+#endif
+
             if (_needUpdates.Count == 0 || forceCheck == true)
             {
                 try

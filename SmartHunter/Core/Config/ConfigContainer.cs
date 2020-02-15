@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using SmartHunter.Ui.Windows;
 using ErrorEventArgs = Newtonsoft.Json.Serialization.ErrorEventArgs;
 
 namespace SmartHunter.Core.Config
@@ -28,7 +29,7 @@ namespace SmartHunter.Core.Config
             Log.WriteException(args.ErrorContext.Error);
             args.ErrorContext.Handled = true;
         }
-        
+
         override protected void OnChanged()
         {
             Load();
@@ -36,7 +37,7 @@ namespace SmartHunter.Core.Config
 
         void Load()
         {
-            if (File.Exists(FullPathFileName))// && FileName.Equals("Config.json"))
+            if (File.Exists(FullPathFileName))
             {
                 try
                 {
@@ -49,10 +50,12 @@ namespace SmartHunter.Core.Config
                         }
                     }
 
-                    var settings = new JsonSerializerSettings();
-                    settings.Formatting = Formatting.Indented;
-                    settings.ContractResolver = new ContractResolver();
-                    settings.Error = HandleDeserializationError;
+                    var settings = new JsonSerializerSettings
+                    {
+                        Formatting = Formatting.Indented,
+                        ContractResolver = new ContractResolver(),
+                        Error = HandleDeserializationError
+                    };
 
                     // Solves dictionary/lists being added to instead of overwritten but causes problems elsewhere
                     // https://stackoverflow.com/questions/29113063/json-net-why-does-it-add-to-list-instead-of-overwriting
@@ -88,17 +91,27 @@ namespace SmartHunter.Core.Config
 
             try
             {
-                var settings = new JsonSerializerSettings();
-                settings.Formatting = Formatting.Indented;
-                settings.NullValueHandling = NullValueHandling.Ignore;
-                settings.ContractResolver = new ContractResolver();
+                var settings = new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore,
+                    ContractResolver = new ContractResolver()
+                };
 
                 settings.Converters.Add(new StringEnumConverter());
                 settings.Converters.Add(new StringFloatConverter());
 
                 var jsonString = JsonConvert.SerializeObject(Values, settings);
 
-                File.WriteAllText(FullPathFileName, jsonString);
+                using (var fileStream = new FileStream(FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Write, 4096, FileOptions.None))
+                {
+                    using var streamWriter = new StreamWriter(fileStream)
+                    {
+                        AutoFlush = true
+                    };
+
+                    streamWriter.Write(jsonString);
+                }
 
                 Log.WriteLine($"{FileName} saved");
             }
