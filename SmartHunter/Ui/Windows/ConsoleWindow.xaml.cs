@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using SmartHunter.Game.Data.ViewModels;
 
 namespace SmartHunter.Ui.Windows
@@ -9,7 +9,8 @@ namespace SmartHunter.Ui.Windows
         {
             InitializeComponent();
 
-            DataContext = ConsoleViewModel.Instance;
+            LogsTab.DataContext = ConsoleViewModel.Instance;
+            SettingsTab.DataContext = SettingsViewModel.Instance;
         }
     }
 }
