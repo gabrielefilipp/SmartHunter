@@ -23,6 +23,13 @@ namespace SmartHunter.Game.Data.WidgetContexts
             set { SetProperty(ref m_ShowCrown, value); }
         }
 
+        bool m_ShowWeakness = true;
+        public bool ShowWeakness
+        {
+            get { return m_ShowWeakness; }
+            set { SetProperty(ref m_ShowWeakness, value); }
+        }
+
         bool m_ShowBars = true;
         public bool ShowBars
         {
@@ -95,6 +102,7 @@ namespace SmartHunter.Game.Data.WidgetContexts
 
             ShowSize = ConfigHelper.Main.Values.Overlay.MonsterWidget.ShowSize;
             ShowCrown = ConfigHelper.Main.Values.Overlay.MonsterWidget.ShowCrown;
+            ShowWeakness = ConfigHelper.Main.Values.Overlay.MonsterWidget.ShowWeakness;
             ShowBars = ConfigHelper.Main.Values.Overlay.MonsterWidget.ShowBars;
             ShowNumbers = ConfigHelper.Main.Values.Overlay.MonsterWidget.ShowNumbers;
             ShowPercents = ConfigHelper.Main.Values.Overlay.MonsterWidget.ShowPercents;

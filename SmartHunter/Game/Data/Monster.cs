@@ -140,6 +140,22 @@ namespace SmartHunter.Game.Data
                 return crown;
             }
         }
+        public string Weakness
+        {
+            get
+            {
+                string weakness = "";
+
+                MonsterConfig config = null;
+                if (ConfigHelper.MonsterData.Values.Monsters.TryGetValue(Id, out config))
+                {
+                    weakness = config.Weakness;
+                }
+
+                return weakness;
+            }
+        }
+
 
         public Progress Health { get; private set; }
         public ObservableCollection<MonsterPart> Parts { get; private set; }

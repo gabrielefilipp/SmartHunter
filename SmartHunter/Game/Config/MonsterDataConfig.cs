@@ -21,7 +21,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1754.37f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             {
@@ -39,10 +40,11 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1754.37f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
-			{
+            {
                 "em001_02", // true
                 new MonsterConfig("LOC_MONSTER_GOLD_RATHIAN",
                     new MonsterPartConfig[]
@@ -57,7 +59,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1754.37f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             {
@@ -75,7 +78,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1704.22f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             {
@@ -93,10 +97,11 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1704.22f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
-			{
+            {
                 "em002_02", // true
                 new MonsterConfig("LOC_MONSTER_SILVER_RATHALOS",
                     new MonsterPartConfig[]
@@ -111,7 +116,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1704.22f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             {
@@ -130,7 +136,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     2096.25f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             {
@@ -149,7 +156,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     2096.25f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             {
@@ -163,6 +171,7 @@ namespace SmartHunter.Game.Config
                     },
                     536.26f,
                     new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon",
                     true
                 )
             },
@@ -181,7 +190,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1389.01f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -199,7 +209,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1389.01f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -219,7 +230,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     829.11f,
-                    new MonsterCrownConfig(CrownPreset.Rajang)
+                    new MonsterCrownConfig(CrownPreset.Rajang),
+                    "Dragon"
                 )
             },
             { // true
@@ -237,6 +249,7 @@ namespace SmartHunter.Game.Config
                     },
                     1913.13f,
                     new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon",
                     true
                 )
             },
@@ -255,6 +268,7 @@ namespace SmartHunter.Game.Config
                     },
                     1828.69f,
                     new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon",
                     true
                 )
             },
@@ -273,6 +287,7 @@ namespace SmartHunter.Game.Config
                     },
                     1790.15f,
                     new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon",
                     true
                 )
             },
@@ -291,7 +306,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1943.2f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             {
@@ -309,7 +325,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1943.2f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             {
@@ -325,7 +342,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1797.24f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -343,7 +361,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1914.74f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -361,7 +380,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     2098.3f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -380,7 +400,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     2063.82f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
+                    new MonsterCrownConfig(CrownPreset.Alternate),
+                    "Dragon"
                 )
             },
             { // true
@@ -399,7 +420,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     2063.82f,
-                    new MonsterCrownConfig(CrownPreset.Savage)
+                    new MonsterCrownConfig(CrownPreset.Savage),
+                    "Dragon"
                 )
             },
             { // true
@@ -423,7 +445,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL_MUD")
                     },
                     1383.07f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -441,7 +464,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     2058.63f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
+                    new MonsterCrownConfig(CrownPreset.Alternate),
+                    "Dragon"
                 )
             },
             { // true
@@ -459,7 +483,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1743.49f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -477,7 +502,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1743.49f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -495,7 +521,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1630.55f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -513,7 +540,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     2461.5f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
+                    new MonsterCrownConfig(CrownPreset.Alternate),
+                    "Dragon"
                 )
             },
             { // true
@@ -531,7 +559,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     2372.44f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
+                    new MonsterCrownConfig(CrownPreset.Alternate),
+                    "Dragon"
                 )
             },
             { // true
@@ -547,7 +576,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1646.46f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
+                    new MonsterCrownConfig(CrownPreset.Alternate),
+                    "Dragon"
                 )
             },
             { // true
@@ -563,7 +593,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1646.46f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
+                    new MonsterCrownConfig(CrownPreset.Alternate),
+                    "Dragon"
                 )
             },
             { // true
@@ -579,7 +610,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_ABDOMEN")
                     },
                     1109.66f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -597,7 +629,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1102.45f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
+                    new MonsterCrownConfig(CrownPreset.Alternate),
+                    "Dragon"
                 )
             },
             { // true
@@ -615,7 +648,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1102.45f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
+                    new MonsterCrownConfig(CrownPreset.Alternate),
+                    "Dragon"
                 )
             },
             { // true
@@ -638,6 +672,7 @@ namespace SmartHunter.Game.Config
                     },
                     1848.12f,
                     new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon",
                     true
                 )
             },
@@ -661,6 +696,7 @@ namespace SmartHunter.Game.Config
                     },
                     1848.12f,
                     new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon",
                     true
                 )
             },
@@ -731,6 +767,7 @@ namespace SmartHunter.Game.Config
                     },
                     4799.78f,
                     new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon",
                     true
                 )
             },
@@ -753,7 +790,8 @@ namespace SmartHunter.Game.Config
                     },
                     4509.1f,
                     null,
-                    true
+                                    "Dragon",
+    true
                 )
             },
             { // true
@@ -779,7 +817,8 @@ namespace SmartHunter.Game.Config
                     },
                     25764.59f,
                     null,
-                    true
+                               "Dragon",
+         true
                 )
             },
             { // true
@@ -794,7 +833,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_ROCK")
                     },
                     901.24f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -814,7 +854,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL_MUD")
                     },
                     1508.71f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -830,7 +871,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1300.52f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
+                    new MonsterCrownConfig(CrownPreset.Alternate),
+                    "Dragon"
                 )
             },
             { // true
@@ -846,7 +888,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1300.52f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
+                    new MonsterCrownConfig(CrownPreset.Alternate),
+                    "Dragon"
                 )
             },
             { // true
@@ -865,7 +908,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1143.36f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -884,7 +928,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1143.36f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -901,7 +946,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1699.75f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -918,7 +964,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1831.69f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -934,7 +981,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1053.15f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -950,7 +998,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1388.75f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -966,7 +1015,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1388.75f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -986,7 +1036,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_BONE_RIGHT")
                     },
                     1803.47f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
+                    new MonsterCrownConfig(CrownPreset.Alternate),
+                    "Dragon"
                 )
             },
             { // true
@@ -1007,6 +1058,7 @@ namespace SmartHunter.Game.Config
                     },
                     2095.4f,
                     new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon",
                     true
                 )
             },
@@ -1028,6 +1080,7 @@ namespace SmartHunter.Game.Config
                     },
                     2095.4f,
                     new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon",
                     true
                 )
             },
@@ -1044,7 +1097,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1111.11f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -1073,7 +1127,8 @@ namespace SmartHunter.Game.Config
                     },
                     4573.25f,
                     null,
-                    true
+                                "Dragon",
+        true
                 )
             },
             { // true
@@ -1090,7 +1145,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1928.38f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -1107,7 +1163,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     1928.38f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -1122,7 +1179,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     894.04f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -1142,7 +1200,8 @@ namespace SmartHunter.Game.Config
                     },
                     3423.65f,
                     null,
-                    true
+                        "Dragon",
+                true
                 )
             },
             { // true
@@ -1159,7 +1218,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL_SNOW")
                     },
                     1661.99f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -1176,7 +1236,8 @@ namespace SmartHunter.Game.Config
                         new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
                     2404.84f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon"
                 )
             },
             { // true
@@ -1200,6 +1261,7 @@ namespace SmartHunter.Game.Config
                     },
                     2596.05f,
                     new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon",
                     true
                 )
             },
@@ -1218,6 +1280,7 @@ namespace SmartHunter.Game.Config
                     },
                     2048.25f,
                     new MonsterCrownConfig(CrownPreset.Standard),
+                    "Dragon",
                     true
                 )
             },
@@ -1246,6 +1309,7 @@ namespace SmartHunter.Game.Config
                     },
                     2910.91f,
                     null,
+                    "Dragon",
                     true
                 )
             },
@@ -1266,7 +1330,8 @@ namespace SmartHunter.Game.Config
                     },
                     549.70f,
                     null,
-                    true
+                     "Dragon",
+                   true
                 )
             },
             { // true
@@ -1286,6 +1351,7 @@ namespace SmartHunter.Game.Config
                     },
                     633.81f,
                     null,
+                    "Dragon",
                     true
                 )
             }

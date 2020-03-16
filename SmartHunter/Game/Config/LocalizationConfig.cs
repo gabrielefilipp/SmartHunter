@@ -418,6 +418,12 @@ namespace SmartHunter.Config
             { "LOC_STATUS_EFFECT_RAGE", "Rage" },
             { "LOC_STATUS_EFFECT_STAMINA", "Stamina" },
             { "LOC_STATUS_EFFECT_FATIGUE", "Fatigue" },
+
+            { "LOC_WEAKNESS_DRAGON", "Dragon" },
+            { "LOC_WEAKNESS_FIRE", "Fire" },
+            { "LOC_WEAKNESS_ICE", "Ice" },
+            { "LOC_WEAKNESS_THUNDER", "Thunder" },
+            { "LOC_WEAKNESS_WATER", "Water" },
         };
         
         public LocalizationConfig()

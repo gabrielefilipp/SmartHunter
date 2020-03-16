@@ -13,14 +13,16 @@ namespace SmartHunter.Game.Config
         public float BaseSize;
         public float ScaleModifier = 1f;
         public MonsterCrownConfig Crowns;
+        public string Weakness;
         public bool isElder = false;
 
-        public MonsterConfig(string nameStringId, MonsterPartConfig[] parts, float baseSize, MonsterCrownConfig crowns, bool elder = false)
+        public MonsterConfig(string nameStringId, MonsterPartConfig[] parts, float baseSize, MonsterCrownConfig crowns, string weakness, bool elder = false)
         {
             NameStringId = nameStringId;
             Parts = parts;
             BaseSize = baseSize;
             Crowns = crowns;
+            Weakness = weakness;
             isElder = elder;
         }
     }

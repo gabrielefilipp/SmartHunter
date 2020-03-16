@@ -58,6 +58,8 @@
     <Color x:Key="A_Color_Crown_Silver_Body">#eeeeee</Color>
     <Color x:Key="A_Color_Crown_Silver_Gem">#dd0000</Color>
 
+    <Color x:Key="A_Color_Weakness">#eeeeee</Color>
+
     <Color x:Key="A_Color_DropShadow">#88000000</Color>
     <SolidColorBrush x:Key="A_Brush_DropShadow" Color="{StaticResource A_Color_DropShadow}" />
 
@@ -793,6 +795,12 @@
                         <TextBlock Text="{Binding Size, StringFormat=\{0:N2\}}" Style="{StaticResource A_Style_TextBlock_Standard_Centered}" />
                     </Grid>
                     <!--/Size-->
+                    <!--Weakness-->
+                    <Grid x:Name="Weakness" VerticalAlignment="Bottom">
+                        <TextBlock Text="{Binding Weakness}" Style="{StaticResource A_Style_TextBlock_Heading}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}" />
+                        <TextBlock Text="{Binding Weakness}" Style="{StaticResource A_Style_TextBlock_Heading}" />
+                    </Grid>
+                    <!--/Weakness-->
                     <Grid VerticalAlignment="Bottom">
                         <TextBlock Text="{Binding Name}" Style="{StaticResource A_Style_TextBlock_Heading}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}" />
                         <TextBlock Text="{Binding Name}" Style="{StaticResource A_Style_TextBlock_Heading}" />
@@ -857,6 +865,9 @@
 
             <DataTrigger Binding="{Binding DataContext.ShowCrown, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False">
                 <Setter TargetName="Crown" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding DataContext.ShowWeakness, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False">
+                <Setter TargetName="Weakness" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
             <DataTrigger Binding="{Binding DataContext.ShowBars, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False">
                 <Setter TargetName="HealthBar" Property="Visibility" Value="Collapsed" />
