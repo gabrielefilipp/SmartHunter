@@ -6,7 +6,7 @@ namespace SmartHunter.Ui.Converters
 {
     public class StringFormatConverter : IMultiValueConverter
     {
-        public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (parameter != null)
             {

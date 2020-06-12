@@ -1,4 +1,4 @@
-﻿namespace SmartHunter.Core.Config
+namespace SmartHunter.Core.Config
 {
     public class WidgetConfig
     {

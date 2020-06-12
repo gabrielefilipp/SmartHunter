@@ -1,4 +1,4 @@
-﻿namespace SmartHunter.Game.Config
+namespace SmartHunter.Game.Config
 {
     public class OverlayConfig
     {
@@ -7,10 +7,10 @@
         public float ScaleStep = 0.1f;
         public bool HideWhenGameWindowIsInactive = false;
         public int UpdatesPerSecond = 20;
-        public bool ShowWindows = false;
 
         public TeamWidgetConfig TeamWidget = new TeamWidgetConfig(220, 220);
         public MonsterWidgetConfig MonsterWidget = new MonsterWidgetConfig(320, 120);
         public PlayerWidgetConfig PlayerWidget = new PlayerWidgetConfig(120, 320);
+        public DebugWidgetConfig DebugWidget = new DebugWidgetConfig(120, 320);
     }
 }

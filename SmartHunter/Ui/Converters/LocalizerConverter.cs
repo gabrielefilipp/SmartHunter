@@ -1,12 +1,14 @@
-﻿using SmartHunter.Core;
-using SmartHunter.Game.Helpers;
+﻿using System;
+using System.Globalization;
 using System.Windows.Data;
+using SmartHunter.Core;
+using SmartHunter.Game.Helpers;
 
 namespace SmartHunter.Ui.Converters
 {
     public class LocalizerConverter : IValueConverter
     {
-        public object Convert(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string stringId = null;
             if (value != null && value is string)
@@ -26,9 +28,9 @@ namespace SmartHunter.Ui.Converters
             return LocalizationHelper.GetString(stringId);
         }
 
-        public object ConvertBack(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

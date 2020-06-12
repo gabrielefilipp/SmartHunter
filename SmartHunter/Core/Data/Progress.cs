@@ -1,55 +1,73 @@
-﻿using System;
+using System;
+using System.Drawing;
 
 namespace SmartHunter.Core.Data
 {
     public class Progress : Bindable, IComparable
     {
-        float m_Max;
-        public float Max
-        {
-            get { return m_Max; }
-            set
-            {
-                SetProperty(ref m_Max, value);
-            }
-        }
-
-        float m_Current;
-        public float Current
-        {
-            get { return m_Current; }
-            set
-            {
-                if (ShouldCapCurrent)
-                { 
-                    value = Cap(value, m_Max);
-                }
-
-                if (SetProperty(ref m_Current, value))
-                {
-                    if (m_Current > m_Max)
-                    {
-                        Max = m_Current;
-                    }
-
-                    NotifyPropertyChanged(nameof(Fraction));
-                    NotifyPropertyChanged(nameof(Angle));
-                }
-            }
-        }
-
-        public float Fraction { get { return m_Current / m_Max; } }
-        public float Angle { get { return Fraction * 359.999f; } }
-
-        public bool ShouldCapCurrent { get; set; }
+        private float _max;
+        private float _current;
+        private readonly bool _shouldCapCurrent;
 
         public Progress(float max, float current, bool shouldCapCurrent = false)
         {
-            ShouldCapCurrent = shouldCapCurrent;
+            _shouldCapCurrent = shouldCapCurrent;
 
             Max = max;
             Current = current;
         }
+
+        public float Max
+        {
+            get => _max;
+            set => SetProperty(ref _max, value);
+        }
+
+        public float Current
+        {
+            get => _current;
+            set
+            {
+                if (_shouldCapCurrent)
+                {
+                    value = Cap(value, _max);
+                }
+
+                if (SetProperty(ref _current, value))
+                {
+                    if (_current > _max)
+                    {
+                        Max = _current;
+                    }
+
+                    NotifyPropertyChanged(nameof(Fraction));
+                    NotifyPropertyChanged(nameof(Angle));
+                    NotifyPropertyChanged(nameof(Color));
+                }
+            }
+        }
+
+        public string Color
+        {
+            get
+            {
+                Color c;
+                if (Fraction > 0.5f)
+                {
+                    var red = (int)(255f * 2 * (1 -  Fraction));
+                    c = System.Drawing.Color.FromArgb(255, red, 255, 0);
+                }
+                else
+                {
+                    var green = (int)(255f * 2 * Fraction);
+                    c = System.Drawing.Color.FromArgb(255, 255, green, 0);
+                }
+                return "#" + c.R.ToString("X2") + c.G.ToString("X2") + "00";
+            }
+        }
+
+        public float Fraction => _current / _max;
+        public float Angle => Fraction * 359.999f;
 
         // We only really want the default compare to compare nulls.
         // We can then compare by Current in a separate pass for better control.
@@ -63,7 +81,7 @@ namespace SmartHunter.Core.Data
             return 0;
         }
 
-        public float Cap(float value, float max)
+        private float Cap(float value, float max)
         {
             if (value < 0)
             {

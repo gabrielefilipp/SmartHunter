@@ -1,7 +1,7 @@
-﻿using SmartHunter.Game.Config;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using SmartHunter.Game.Config;
 
 namespace SmartHunter.Core
 {
@@ -10,24 +10,12 @@ namespace SmartHunter.Core
         public BytePatternConfig Config { get; }
         public byte?[] Bytes { get; private set; }
         public List<ulong> MatchedAddresses { get; private set; }
-        public AddressRange AddressRange { get; private set; }
 
         public BytePattern(BytePatternConfig config)
         {
             Config = config;
-            Bytes = BytesFromString(config.String);
+            Bytes = BytesFromString(config.PatternString);
             MatchedAddresses = new List<ulong>();
-
-            if (ulong.TryParse(config.AddressRangeStart, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out ulong start)
-                && ulong.TryParse(config.AddressRangeEnd, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out ulong end))
-            {
-                AddressRange = new AddressRange(start, end);
-            }
-            else
-            {
-                AddressRange = new AddressRange(0, 0);
-                Log.WriteLine($"Failed to parse address range ({config.AddressRangeStart} - {config.AddressRangeEnd}) for pattern: {config.String}");
-            }
         }
 
         public static byte?[] BytesFromString(string byteString)

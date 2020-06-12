@@ -1,57 +1,63 @@
-﻿using SmartHunter.Core.Config;
+using SmartHunter.Core.Config;
 
 namespace SmartHunter.Core.Data
 {
     public class Widget : Bindable
     {
-        WidgetConfig m_WidgetConfig;
+        readonly WidgetConfig _widgetConfig;
+        private float _x;
+        private float _y;
+        private float _scale = 1;
+        private bool _isVisible = true;
 
-        float m_X;
+        public Widget(WidgetConfig widgetConfig)
+        {
+            _widgetConfig = widgetConfig;
+            UpdateFromConfig();
+        }
+
         public float X
         {
-            get { return m_X; }
+            get => _x;
             set
             {
-                if (SetProperty(ref m_X, value) && m_X != m_WidgetConfig.X)
+                if (SetProperty(ref _x, value) && _x != _widgetConfig.X)
                 {
                     UpdateConfig();
                 }
             }
         }
 
-        float m_Y;
         public float Y
         {
-            get { return m_Y; }
+            get => _y;
             set
             {
-                if (SetProperty(ref m_Y, value) && m_Y != m_WidgetConfig.Y)
+                if (SetProperty(ref _y, value) && _y != _widgetConfig.Y)
                 {
                     UpdateConfig();
                 }
             }
         }
 
-        float m_Scale = 1;
         public float Scale
         {
-            get { return m_Scale; }
+            get => _scale;
             set
             {
-                if (SetProperty(ref m_Scale, value) && m_Scale != m_WidgetConfig.Scale)
+                if (SetProperty(ref _scale, value) && _scale != _widgetConfig.Scale)
                 {
                     UpdateConfig();
                 }
             }
         }
 
-        bool m_IsVisible = true;
         public bool IsVisible
         {
-            get { return m_IsVisible; }
+            get => _isVisible;
             set
             {
-                if (SetProperty(ref m_IsVisible, value) && m_IsVisible != m_WidgetConfig.IsVisible)
+                if (SetProperty(ref _isVisible, value) && _isVisible != _widgetConfig.IsVisible)
                 {
                     UpdateConfig();
                 }
@@ -60,28 +66,22 @@ namespace SmartHunter.Core.Data
 
         public bool CanSaveConfig { get; set; }
 
-        public Widget(WidgetConfig widgetConfig)
-        {
-            m_WidgetConfig = widgetConfig;
-            UpdateFromConfig();            
-        }
-
-        void UpdateConfig()
-        {
-            m_WidgetConfig.X = m_X;
-            m_WidgetConfig.Y = m_Y;
-            m_WidgetConfig.Scale = m_Scale;
-            m_WidgetConfig.IsVisible = m_IsVisible;
-
-            CanSaveConfig = true;
-        }
-
         public virtual void UpdateFromConfig()
         {
-            X = m_WidgetConfig.X;
-            Y = m_WidgetConfig.Y;
-            Scale = m_WidgetConfig.Scale;
-            IsVisible = m_WidgetConfig.IsVisible;
+            X = _widgetConfig.X;
+            Y = _widgetConfig.Y;
+            Scale = _widgetConfig.Scale;
+            IsVisible = _widgetConfig.IsVisible;
+        }
+
+        private void UpdateConfig()
+        {
+            _widgetConfig.X = _x;
+            _widgetConfig.Y = _y;
+            _widgetConfig.Scale = _scale;
+            _widgetConfig.IsVisible = _isVisible;
+
+            CanSaveConfig = true;
         }
     }
 }

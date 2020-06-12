@@ -1,20 +1,19 @@
-﻿using SmartHunter.Core.Config;
-using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
+using SmartHunter.Core.Config;
 
 namespace SmartHunter.Game.Config
 {
     public class PlayerWidgetConfig : WidgetConfig
     {
-        public string StatusEffectTagsRegex = ".*|Buff|Debuff|HuntingHorn|CoralOrchestra|Equipment|Weapon";
+        public string IncludeStatusEffectGroupIdRegex = ".*";
 
         public PlayerWidgetConfig(float x, float y) : base(x, y)
         {
         }
 
-        public bool MatchStatusEffectTags(string[] tags)
+        public bool MatchIncludeStatusEffectGroupIdRegex(string groupId)
         {
-            return new Regex(StatusEffectTagsRegex, RegexOptions.CultureInvariant).IsMatch(String.Join(" ", tags));
+            return new Regex(IncludeStatusEffectGroupIdRegex).IsMatch(groupId);
         }
     }
 }

@@ -1,48 +1,40 @@
-﻿using SmartHunter.Core;
+using System.ComponentModel;
 
 namespace SmartHunter.Game.Config
 {
-    public enum CrownPreset
-    {
-        Standard,
-        Alternate
-    }
-
     public class MonsterCrownConfig
     {
-        public float Mini = 0.9f;
-        public float Silver = 1.15f;
-        public float Gold = 1.23f;
-
-        public MonsterCrownConfig()
-        {
-        }
+        public float Mini;
+        public float Silver;
+        public float Gold;
 
         public MonsterCrownConfig(CrownPreset crownPreset)
         {
-            if (crownPreset == CrownPreset.Standard)
+            switch (crownPreset)
             {
-                Mini = 0.9f;
-                Silver = 1.15f;
-                Gold = 1.23f;
+                case CrownPreset.Standard:
+                    Mini = 0.9f;
+                    Silver = 1.15f;
+                    Gold = 1.23f;
+                    break;
+                case CrownPreset.Alternate:
+                    Mini = 0.9f;
+                    Silver = 1.1f;
+                    Gold = 1.2f;
+                    break;
+                case CrownPreset.Savage:
+                    Mini = 0.99f;
+                    Silver = 1.14f;
+                    Gold = 1.2f;
+                    break;
+                case CrownPreset.Rajang:
+                    Mini = 0.9f;
+                    Silver = 1.11f;
+                    Gold = 1.18f;
+                    break;
+                default:
+                    throw new InvalidEnumArgumentException(nameof(crownPreset), (int)crownPreset, typeof(CrownPreset));
             }
-            else if (crownPreset == CrownPreset.Alternate)
-            {
-                Mini = 0.9f;
-                Silver = 1.1f;
-                Gold = 1.2f;
-            }
-            else
-            {
-                Log.WriteLine($"MonsterCrownConfig: Unhandled CrownPreset {crownPreset.ToString()}");
-            }
-        }
-
-        public MonsterCrownConfig(float mini, float silver, float gold)
-        {
-            Mini = mini;
-            Silver = silver;
-            Gold = gold;
         }
     }
 }

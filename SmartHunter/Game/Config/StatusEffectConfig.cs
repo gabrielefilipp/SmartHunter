@@ -1,30 +1,35 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+using SmartHunter.Game.Data;
 
 namespace SmartHunter.Game.Config
 {
-    public class StatusEffectConfig
+    public partial class StatusEffectConfig
     {
-        public enum MemorySource
-        {
-            Base,
-            Equipment,
-            Weapon
-        }
 
+        public string GroupId;
         public string NameStringId;
-        public string[] Tags;
         public string TimerOffset;
         public MemorySource Source;
         public MemoryConditionConfig[] Conditions;
+        public WeaponType WeaponType;
 
-        public StatusEffectConfig(string nameStringId, IEnumerable<string> tags, MemorySource source, string timerOffset, params MemoryConditionConfig[] conditions)
+        public StatusEffectConfig() { }
+
+        public StatusEffectConfig(string groupId, string nameStringId, MemorySource source, string timerOffset, params MemoryConditionConfig[] conditions)
         {
+            GroupId = groupId;
             NameStringId = nameStringId;
-            Tags = tags.ToArray();
             Source = source;
             TimerOffset = timerOffset;
             Conditions = conditions;
+        }
+
+        public StatusEffectConfig(string groupId, string nameStringId, MemorySource source, string timerOffset, WeaponType weaponType)
+        {
+            GroupId = groupId;
+            NameStringId = nameStringId;
+            Source = source;
+            TimerOffset = timerOffset;
+            WeaponType = weaponType;
         }
     }
 }

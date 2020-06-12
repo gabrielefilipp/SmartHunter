@@ -1,4 +1,6 @@
-.vs
-bin
-obj
-*.user
+[Bb]in
+[Dd]ebug/
+[Pp]ublish/
+[Rr]elease*/
+obj/
+.vs/

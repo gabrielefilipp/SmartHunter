@@ -13,7 +13,7 @@ namespace SmartHunter.Game.Data
             {
                 if (SetProperty(ref m_Index, value))
                 {
-                    NotifyPropertyChanged(nameof(Tags));
+                    NotifyPropertyChanged(nameof(GroupId));
                     NotifyPropertyChanged(nameof(Name));
                     NotifyPropertyChanged(nameof(IsVisible));
                 }
@@ -35,6 +35,14 @@ namespace SmartHunter.Game.Data
             }
         }
 
+        public string GroupId
+        {
+            get
+            {
+                return GetGroupIdFromIndex(Index);
+            }
+        }
+
         public string Name
         {
             get
@@ -43,19 +51,11 @@ namespace SmartHunter.Game.Data
             }
         }
 
-        public string[] Tags
-        {
-            get
-            {
-                return GetTagsFromIndex(Index);
-            }
-        }
-
         public bool IsVisible
         {
             get
             {
-                return IsIncluded(Tags) && IsConditionPassed;
+                return IsIncluded(GroupId) && IsConditionPassed;
             }
         }
 
@@ -71,14 +71,14 @@ namespace SmartHunter.Game.Data
             m_IsConditionPassed = isConditionPassed;
         }
 
-        public static string[] GetTagsFromIndex(int index)
+        public static string GetGroupIdFromIndex(int index)
         {
-            return ConfigHelper.PlayerData.Values.StatusEffects[index].Tags;
+            return ConfigHelper.PlayerData.Values.StatusEffects[index].GroupId;
         }
 
-        public static bool IsIncluded(string[] tags)
+        public static bool IsIncluded(string groupId)
         {
-            return ConfigHelper.Main.Values.Overlay.PlayerWidget.MatchStatusEffectTags(tags);
+            return ConfigHelper.Main.Values.Overlay.PlayerWidget.MatchIncludeStatusEffectGroupIdRegex(groupId);
         }
     }
 }

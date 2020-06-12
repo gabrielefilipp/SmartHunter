@@ -1,332 +1,335 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace SmartHunter.Game.Config
 {
     public class MonsterDataConfig
     {
-        static class PartTags
-        {
-            public static string[] RemovableTail  = { "Tail", "Removable" };
-            public static string[] Head           = { "Head" };
-            public static string[] Body           = { "Body" };
-            public static string[] Legs           = { "Legs", "Limbs" };
-            public static string[] Tail           = { "Tail" };
-            public static string[] Wings          = { "Wings" };
-            public static string[] Arms           = { "Arms", "Limbs" };
-            public static string[] Horns          = { "Horns" };
-            public static string[] RemovableHorns = { "Horns", "Removable" };
-            public static string[] Limbs          = { "Limbs" };
-            public static string[] Mud            = { "Mud" };
-        }
-
-        static class StatusEffectTags
-        {
-            public static string[] Poison      = { "Poison", "Debuff" };
-            public static string[] Paralysis   = { "Paralysis", "Debuff" };
-            public static string[] Sleep       = { "Sleep", "Debuff" };
-            public static string[] Blast       = { "Blast", "Debuff" };
-            public static string[] Mount       = { "Mount", "Debuff" };
-            public static string[] Exhaust     = { "Exhaust", "Debuff" };
-            public static string[] Stun        = { "Stun", "Debuff" };
-            public static string[] Tranquilize = { "Tranquilize", "Debuff" };
-            public static string[] Flash       = { "Flash", "Debuff" };
-            public static string[] Dung        = { "Dung", "Debuff" };
-            public static string[] ShockTrap   = { "ShockTrap", "Debuff" };
-            public static string[] PitfallTrap = { "PitfallTrap", "Debuff" };
-            public static string[] Elderseal   = { "Elderseal", "Debuff" };
-            public static string[] Rage        = { "Rage", "Behavior" };
-            public static string[] Fatigue     = { "Fatigue", "Behavior" };
-        }
-
         public Dictionary<string, MonsterConfig> Monsters = new Dictionary<string, MonsterConfig>()
         {
             {
-                "em100_00",
-                new MonsterConfig("LOC_MONSTER_ANJANATH",
+                "em001_00", // true
+                new MonsterConfig("LOC_MONSTER_RATHIAN",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
-                    1646.46f, 1f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
+                    1754.37f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
                 )
             },
             {
-                "em002_01",
+                "em001_01", // true
+                new MonsterConfig("LOC_MONSTER_PINK_RATHIAN",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1754.37f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+			{
+                "em001_02", // true
+                new MonsterConfig("LOC_MONSTER_GOLD_RATHIAN",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1754.37f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            {
+                "em002_00", // true
+                new MonsterConfig("LOC_MONSTER_RATHALOS",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1704.22f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            {
+                "em002_01", // true
                 new MonsterConfig("LOC_MONSTER_AZURE_RATHALOS",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_WING_LEFT",      PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_WING_RIGHT",     PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
-                    1704.22f, 1f,
+                    1704.22f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+			{
+                "em002_02", // true
+                new MonsterConfig("LOC_MONSTER_SILVER_RATHALOS",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1704.22f,
                     new MonsterCrownConfig(CrownPreset.Standard)
                 )
             },
             {
-                "em044_00",
-                new MonsterConfig("LOC_MONSTER_BARROTH",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_HEAD_MUD",       PartTags.Head.Union(PartTags.Mud)),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_BODY_MUD",       PartTags.Body.Union(PartTags.Mud)),
-                        new MonsterPartConfig("LOC_PART_ARMS",           PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_ARMS_MUD",       PartTags.Arms.Union(PartTags.Mud)),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT_MUD",   PartTags.Legs.Union(PartTags.Mud)),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT_MUD",  PartTags.Legs.Union(PartTags.Mud)),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
-                        new MonsterPartConfig("LOC_PART_TAIL_MUD",       PartTags.Tail.Union(PartTags.Mud)),
-                    },
-                    1383.07f, 0.81f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
-                )
-            },
-            {
-                "em118_00",
-                new MonsterConfig("LOC_MONSTER_BAZELGEUSE",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_LEGS",           PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_WING_LEFT",      PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_WING_RIGHT",     PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
-                    },
-                    1928.38f, 1.1f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
-                )
-            },
-            {
-                "em121_00",
-                new MonsterConfig("LOC_MONSTER_BEHEMOTH",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HORNS",          PartTags.Horns),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_ARM_LEFT",       PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_ARM_RIGHT",      PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
-                    },
-                    3423.65f, 1f,
-                    null
-                )
-            },
-            {
-                "em007_01",
-                new MonsterConfig("LOC_MONSTER_BLACK_DIABLOS",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_WING_LEFT",      PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_WING_RIGHT",     PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
-                    },
-                    2096.25f, 1.2f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
-                )
-            },
-            {
-                "em043_00",
-                new MonsterConfig("LOC_MONSTER_DEVILJHO",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_CHEST",          PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_REAR",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_ARMS",           PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
-                    },
-                    2063.82f, 1f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
-                )
-            },
-            {
-                "em007_00",
+                "em007_00", // true
                 new MonsterConfig("LOC_MONSTER_DIABLOS",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_WING_LEFT",      PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_WING_RIGHT",     PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_HORNS", true),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
-                    2096.25f, 1.2f,
+                    2096.25f,
                     new MonsterCrownConfig(CrownPreset.Standard)
                 )
             },
             {
-                "em116_00",
-                new MonsterConfig("LOC_MONSTER_DODOGAMA",
+                "em007_01", // true
+                new MonsterConfig("LOC_MONSTER_BLACK_DIABLOS",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_ARMS",           PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEGS",           PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_HORNS", true),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
-                    1111.11f, 1f,
+                    2096.25f,
                     new MonsterCrownConfig(CrownPreset.Standard)
                 )
             },
             {
-                "em112_00",
-                new MonsterConfig("LOC_MONSTER_GREAT_GIRROS",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_ARMS",           PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEGS",           PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
-                    },
-                    1053.15f, 0.9f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
-                )
-            },
-            {
-                "em101_00",
-                new MonsterConfig("LOC_MONSTER_GREAT_JAGRAS",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_PART_HEAD",    PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",    PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_ARMS",    PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEGS",    PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",    PartTags.Tail),
-                        new MonsterPartConfig("LOC_PART_ABDOMEN", PartTags.Body),
-                    },
-                    1109.66f, 1f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
-                )
-            },
-            {
-                "em108_00",
-                new MonsterConfig("LOC_MONSTER_JYURATODUS",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_PART_HEAD",          PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",          PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",     PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",          PartTags.Tail),
-                        new MonsterPartConfig("LOC_PART_HEAD_MUD",      PartTags.Head.Union(PartTags.Mud)),
-                        new MonsterPartConfig("LOC_PART_BODY_MUD",      PartTags.Body.Union(PartTags.Mud)),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT_MUD",  PartTags.Legs.Union(PartTags.Mud)),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT_MUD", PartTags.Legs.Union(PartTags.Mud)),
-                        new MonsterPartConfig("LOC_PART_TAIL_MUD",      PartTags.Tail.Union(PartTags.Mud)),
-                    },
-                    1508.71f, 1f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
-                )
-            },
-            {
-                "em011_00",
+                "em011_00", // true
                 new MonsterConfig("LOC_MONSTER_KIRIN",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_PART_HEAD", PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_ARMS", PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEGS", PartTags.Legs),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS")
                     },
-                    536.26f, 1f,
+                    536.26f,
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    true
+                )
+            },
+            { // true
+                "em018_00",
+                new MonsterConfig("LOC_MONSTER_YIAN_GARUGA",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1389.01f,
                     new MonsterCrownConfig(CrownPreset.Standard)
                 )
             },
-            {
-                "em107_00",
-                new MonsterConfig("LOC_MONSTER_KULU_YA_KU",
+            { // true
+                "em018_05",
+                new MonsterConfig("LOC_MONSTER_SCARRED_YIAN_GARUGA",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_PART_HEAD", PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_ARMS", PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEGS", PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL", PartTags.Tail),
-                        new MonsterPartConfig("LOC_PART_ROCK", PartTags.Body), // TODO: Tag?
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
-                    901.24f, 0.9f,
+                    1389.01f,
                     new MonsterCrownConfig(CrownPreset.Standard)
                 )
             },
-            {
-                "em117_00",
-                new MonsterConfig("LOC_MONSTER_KULVE_TAROTH",
+            { // true
+                "em023_00",
+                new MonsterConfig("LOC_MONSTER_RAJANG",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_HORNS",   PartTags.RemovableHorns, true),
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_HORNS_2", PartTags.RemovableHorns, true),
-                        new MonsterPartConfig("LOC_PART_HORNS",             PartTags.Horns),
-                        new MonsterPartConfig("LOC_PART_CHEST",             PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_BODY",              PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_LIMBS_LEFT",        PartTags.Limbs),
-                        new MonsterPartConfig("LOC_PART_LIMBS_RIGHT",       PartTags.Limbs),
-                        new MonsterPartConfig("LOC_PART_TAIL",              PartTags.Tail),
-                        new MonsterPartConfig("LOC_PART_HORNS_GOLD",        PartTags.Horns),
-                        new MonsterPartConfig("LOC_PART_MANE_GOLD",         PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_CHEST_LEFT_GOLD",   PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_CHEST_RIGHT_GOLD",  PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_ARM_LEFT_GOLD",     PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_ARM_RIGHT_GOLD",    PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT_GOLD",     PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT_GOLD",    PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL_LEFT_GOLD",    PartTags.Tail),
-                        new MonsterPartConfig("LOC_PART_TAIL_RIGHT_GOLD",   PartTags.Tail),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_HORNS", true),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Removable", "LOC_PART_UKNOWN", true),
                     },
-                    4573.25f, 1f,
-                    null
+                    829.11f,
+                    new MonsterCrownConfig(CrownPreset.Rajang)
                 )
             },
             {
+                "em023_05",
+                new MonsterConfig("LOC_MONSTER_FURIOUS_RAJANG",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_HORNS", true),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_HORNS_2", true),
+                        new MonsterPartConfig("Removable", "LOC_PART_UKNOWN", true),
+                    },
+                    829.11f,
+                    new MonsterCrownConfig(CrownPreset.Rajang)
+                )
+            },
+            { // true
                 "em024_00",
                 new MonsterConfig("LOC_MONSTER_KUSHALA_DAORA",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
-                        new MonsterPartConfig("LOC_PART_LIMBS_LEFT",     PartTags.Limbs),
-                        new MonsterPartConfig("LOC_PART_LIMBS_RIGHT",    PartTags.Limbs),
-                        new MonsterPartConfig("LOC_PART_WINGS",          PartTags.Wings),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Part", "LOC_PART_LIMBS_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LIMBS_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WINGS")
                     },
-                    1913.13f, 0.85f,
+                    1913.13f,
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    true
+                )
+            },
+            { // true
+                "em026_00",
+                new MonsterConfig("LOC_MONSTER_LUNASTRA",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LIMBS"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1828.69f,
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    true
+                )
+            },
+            { // true
+                "em027_00",
+                new MonsterConfig("LOC_MONSTER_TEOSTRA",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_WINGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1790.15f,
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    true
+                )
+            },
+            {
+                "em032_00",
+                new MonsterConfig("LOC_MONSTER_TIGREX",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1943.2f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            {
+                "em032_01",
+                new MonsterConfig("LOC_MONSTER_BRUTE_TIGREX",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1943.2f,
                     new MonsterCrownConfig(CrownPreset.Standard)
                 )
             },
@@ -335,381 +338,1011 @@ namespace SmartHunter.Game.Config
                 new MonsterConfig("LOC_MONSTER_LAVASIOTH",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_PART_HEAD",      PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",      PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_ABDOMEN",   PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",  PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT", PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",      PartTags.Tail),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ABDOMEN"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
-                    1797.24f, 1.2f,
+                    1797.24f,
                     new MonsterCrownConfig(CrownPreset.Standard)
                 )
             },
-            {
-                "em111_00",
-                new MonsterConfig("LOC_MONSTER_LEGIANA",
+            { // true
+                "em037_00",
+                new MonsterConfig("LOC_MONSTER_NARGACUGA",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_PART_HEAD",       PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",       PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_WING_LEFT",  PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_WING_RIGHT", PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",   PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",  PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",       PartTags.Tail),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
-                    1699.75f, 0.9f,
+                    1914.74f,
                     new MonsterCrownConfig(CrownPreset.Standard)
                 )
             },
-            {
-                "em026_00",
-                new MonsterConfig("LOC_MONSTER_LUNASTRA",
+            { // true
+                "em042_00",
+                new MonsterConfig("LOC_MONSTER_BARIOTH",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_LIMBS",          PartTags.Limbs),
-                        new MonsterPartConfig("LOC_PART_WING_LEFT",      PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_WING_RIGHT",     PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
-                    1828.69f, 0.85f,
+                    2098.3f,
                     new MonsterCrownConfig(CrownPreset.Standard)
                 )
             },
-            {
-                "em103_00",
-                new MonsterConfig("LOC_MONSTER_NERGIGANTE",
+            { // true
+                "em043_00",
+                new MonsterConfig("LOC_MONSTER_DEVILJHO",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HORNS",          PartTags.Horns),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_ARM_LEFT",       PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_ARM_RIGHT",      PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_WING_LEFT",      PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_WING_RIGHT",     PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_CHEST"),
+                        new MonsterPartConfig("Part", "LOC_PART_REAR"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
-                    1848.12f, 1f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
-                )
-            },
-            {
-                "em113_00",
-                new MonsterConfig("LOC_MONSTER_ODOGARON",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_ARMS",           PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEGS",           PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
-                    },
-                    1388.75f, 1.15f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
-                )
-            },
-            {
-                "em110_00",
-                new MonsterConfig("LOC_MONSTER_PAOLUMU",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_PART_HEAD",       PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BALLOON",    PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_BODY",       PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",   PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",  PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_WING_LEFT",  PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_WING_RIGHT", PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_TAIL",       PartTags.Tail),
-                    },
-                    1143.36f, 1.05f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
-                )
-            },
-            {
-                "em001_01",
-                new MonsterConfig("LOC_MONSTER_PINK_RATHIAN",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_WING_LEFT",      PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_WING_RIGHT",     PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
-                    },
-                    1754.37f, 1f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
-                )
-            },
-            {
-                "em102_00",
-                new MonsterConfig("LOC_MONSTER_PUKEI_PUKEI",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_WING_LEFT",      PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_WING_RIGHT",     PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
-                    },
-                    1102.45f, 1f,
+                    2063.82f,
                     new MonsterCrownConfig(CrownPreset.Alternate)
                 )
             },
-            {
-                "em114_00",
-                new MonsterConfig("LOC_MONSTER_RADOBAAN",
+            { // true
+                "em043_05",
+                new MonsterConfig("LOC_MONSTER_SAVAGE_DEVILJHO",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
-                        new MonsterPartConfig("LOC_PART_JAW",            PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BACK",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_BONE_LEFT",      PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_BONE_RIGHT",     PartTags.Body),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_CHEST"),
+                        new MonsterPartConfig("Part", "LOC_PART_REAR"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
-                    1803.47f, 0.9f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
+                    2063.82f,
+                    new MonsterCrownConfig(CrownPreset.Savage)
                 )
             },
-            {
-                "em002_00",
-                new MonsterConfig("LOC_MONSTER_RATHALOS",
+            { // true
+                "em044_00",
+                new MonsterConfig("LOC_MONSTER_BARROTH",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_WING_LEFT",      PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_WING_RIGHT",     PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_HEAD", true),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD_MUD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY_MUD"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS_MUD"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT_MUD"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT_MUD"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL_MUD")
                     },
-                    1704.22f, 1f,
+                    1383.07f,
                     new MonsterCrownConfig(CrownPreset.Standard)
                 )
             },
-            {
-                "em001_00",
-                new MonsterConfig("LOC_MONSTER_RATHIAN",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_WING_LEFT",      PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_WING_RIGHT",     PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
-                    },
-                    1754.37f, 1f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
-                )
-            },
-            {
-                "em027_00",
-                new MonsterConfig("LOC_MONSTER_TEOSTRA",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_ARMS",           PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEGS",           PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_WINGS",          PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
-                    },
-                    1790.15f, 0.85f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
-                )
-            },
-            {
-                "em109_00",
-                new MonsterConfig("LOC_MONSTER_TOBI_KADACHI",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_PART_HEAD",    PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",    PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_MANE",    PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_ABDOMEN", PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_LEGS",    PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",    PartTags.Tail),
-                    },
-                    1300.52f, 1f,
-                    new MonsterCrownConfig(CrownPreset.Alternate)
-                )
-            },
-            {
-                "em120_00",
-                new MonsterConfig("LOC_MONSTER_TZITZI_YA_KU",
-                    new MonsterPartConfig[]
-                    {
-                        new MonsterPartConfig("LOC_PART_HEAD_LEFT",  PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_HEAD_RIGHT", PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_ARMS",       PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEGS",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",       PartTags.Tail),
-                    },
-                    894.04f, 0.9f,
-                    new MonsterCrownConfig(CrownPreset.Standard)
-                )
-            },
-            {
+            { // true
                 "em045_00",
                 new MonsterConfig("LOC_MONSTER_URAGAAN",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_JAW",            PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_ARMS",           PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_JAW"),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
-                    2058.63f, 1f,
+                    2058.63f,
                     new MonsterCrownConfig(CrownPreset.Alternate)
                 )
             },
-            {
-                "em115_00",
-                new MonsterConfig("LOC_MONSTER_VAAL_HAZAK",
+            { // true
+                "em057_00",
+                new MonsterConfig("LOC_MONSTER_ZINOGRE",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BACK",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_CHEST",          PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
-                        new MonsterPartConfig("LOC_PART_ARM_LEFT",       PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_ARM_RIGHT",      PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",       PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_WINGS",          PartTags.Wings),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_BACK"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
-                    2095.4f, 0.9f,
+                    1743.49f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em063_00",
+                new MonsterConfig("LOC_MONSTER_BRACHYDIOS",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1630.55f,
                     new MonsterCrownConfig(CrownPreset.Standard)
                 )
             },
             {
+                "em063_05",
+                new MonsterConfig("LOC_MONSTER_RAGING_BRACHYDIOS",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_BACK"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                    },
+                    2282.77f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            {
+                "em057_01",
+                new MonsterConfig("LOC_MONSTER_STYGIAN_ZINOGRE",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_BACK"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1743.49f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em080_00",
+                new MonsterConfig("LOC_MONSTER_GLAVENUS",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_FIN"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_BACK"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    2461.5f,
+                    new MonsterCrownConfig(CrownPreset.Alternate)
+                )
+            },
+            { // true
+                "em080_01",
+                new MonsterConfig("LOC_MONSTER_ACIDIC_GLAVENUS",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_FIN"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_BACK"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    2372.44f,
+                    new MonsterCrownConfig(CrownPreset.Alternate)
+                )
+            },
+            { // true
+                "em100_00",
+                new MonsterConfig("LOC_MONSTER_ANJANATH",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1646.46f,
+                    new MonsterCrownConfig(CrownPreset.Alternate)
+                )
+            },
+            { // true
+                "em100_01",
+                new MonsterConfig("LOC_MONSTER_ANJANATH_FULGUR",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1646.46f,
+                    new MonsterCrownConfig(CrownPreset.Alternate)
+                )
+            },
+            { // true
+                "em101_00",
+                new MonsterConfig("LOC_MONSTER_GREAT_JAGRAS",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Part", "LOC_PART_ABDOMEN")
+                    },
+                    1109.66f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em102_00",
+                new MonsterConfig("LOC_MONSTER_PUKEI_PUKEI",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1102.45f,
+                    new MonsterCrownConfig(CrownPreset.Alternate)
+                )
+            },
+            { // true
+                "em102_01",
+                new MonsterConfig("LOC_MONSTER_PUKEI_PUKEI_CORAL",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1102.45f,
+                    new MonsterCrownConfig(CrownPreset.Alternate)
+                )
+            },
+            { // true
+                "em103_00",
+                new MonsterConfig("LOC_MONSTER_NERGIGANTE",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_HORNS", true),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HORNS"),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1848.12f,
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    true
+                )
+            },
+            { // true
+                "em103_05",
+                new MonsterConfig("LOC_MONSTER_RUINER_NERGIGANTE",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_HORNS", true),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HORNS"),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1848.12f,
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    true
+                )
+            },
+            {
+                "em104_00",
+                new MonsterConfig("LOC_MONSTER_SAFI_JIIVA",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ABDOMEN"),
+                        new MonsterPartConfig("Part", "LOC_PART_BACK"),
+                        new MonsterPartConfig("Part", "LOC_PART_NECK"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                    },
+                    4799.78f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
                 "em105_00",
                 new MonsterConfig("LOC_MONSTER_XENO_JIIVA",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_TAIL", PartTags.RemovableTail, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",           PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_NECK",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_BACK",           PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_CHEST",          PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_HAND_LEFT",      PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_HAND_RIGHT",     PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_FOOT_LEFT",      PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_FOOT_RIGHT",     PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_WINGS",          PartTags.Wings),
-                        new MonsterPartConfig("LOC_PART_TAIL",           PartTags.Tail),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_NECK"),
+                        new MonsterPartConfig("Part", "LOC_PART_BACK"),
+                        new MonsterPartConfig("Part", "LOC_PART_CHEST"),
+                        new MonsterPartConfig("Part", "LOC_PART_HAND_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_HAND_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_FOOT_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_FOOT_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WINGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
                     },
-                    4509.1f, 1f,
-                    null
+                    4509.1f,
+                    null,
+                    true
                 )
             },
-            {
+            { // true
                 "em106_00",
                 new MonsterConfig("LOC_MONSTER_ZORAH_MAGDAROS",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_PART_HEAD",                  PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",                  PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_CHEST",                 PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_ARM_LEFT",              PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_ARM_RIGHT",             PartTags.Arms),
-                        new MonsterPartConfig("LOC_PART_LEG_LEFT",              PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_LEG_RIGHT",             PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_TAIL",                  PartTags.Tail),
-                        new MonsterPartConfig("LOC_PART_SHELL",                 PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_EXHAUST_ORGAN_CENTRAL", PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_EXHAUST_ORGAN_HEAD",    PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_EXHAUST_ORGAN_CRATER",  PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_EXHAUST_ORGAN_REAR",    PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_WEAK_SHELL_LEFT",       PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_WEAK_SHELL_RIGHT",      PartTags.Body),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_CHEST"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Part", "LOC_PART_SHELL"),
+                        new MonsterPartConfig("Part", "LOC_PART_EXHAUST_ORGAN_CENTRAL"),
+                        new MonsterPartConfig("Part", "LOC_PART_EXHAUST_ORGAN_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_EXHAUST_ORGAN_CRATER"),
+                        new MonsterPartConfig("Part", "LOC_PART_EXHAUST_ORGAN_REAR"),
+                        new MonsterPartConfig("Part", "LOC_PART_WEAK_SHELL_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WEAK_SHELL_RIGHT")
                     },
-                    25764.59f, 1f,
-                    null
+                    25764.59f,
+                    null,
+                    true
                 )
             },
-            {
+            { // true
+                "em107_00",
+                new MonsterConfig("LOC_MONSTER_KULU_YA_KU",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Part", "LOC_PART_ROCK")
+                    },
+                    901.24f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em108_00",
+                new MonsterConfig("LOC_MONSTER_JYURATODUS",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD_MUD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY_MUD"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT_MUD"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT_MUD"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL_MUD")
+                    },
+                    1508.71f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em109_00",
+                new MonsterConfig("LOC_MONSTER_TOBI_KADACHI",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_MANE"),
+                        new MonsterPartConfig("Part", "LOC_PART_ABDOMEN"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1300.52f,
+                    new MonsterCrownConfig(CrownPreset.Alternate)
+                )
+            },
+            { // true
+                "em109_01",
+                new MonsterConfig("LOC_MONSTER_VIPER_TOBI_KADACHI",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_MANE"),
+                        new MonsterPartConfig("Part", "LOC_PART_ABDOMEN"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1300.52f,
+                    new MonsterCrownConfig(CrownPreset.Alternate)
+                )
+            },
+            { // true
+                "em110_00",
+                new MonsterConfig("LOC_MONSTER_PAOLUMU",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_BALOON", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BALLOON"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1143.36f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em110_01",
+                new MonsterConfig("LOC_MONSTER_PAOLUMU_NIGHTSHADE",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_BALOON", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BALLOON"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1143.36f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em111_00",
+                new MonsterConfig("LOC_MONSTER_LEGIANA",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1699.75f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em111_05",
+                new MonsterConfig("LOC_MONSTER_SHRIEKING_LEGIANA",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1831.69f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em112_00",
+                new MonsterConfig("LOC_MONSTER_GREAT_GIRROS",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1053.15f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em113_00",
+                new MonsterConfig("LOC_MONSTER_ODOGARON",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1388.75f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em113_01",
+                new MonsterConfig("LOC_MONSTER_EBONY_ODOGARON",
+                    new MonsterPartConfig[]
+                    {
+                       new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1388.75f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em114_00",
+                new MonsterConfig("LOC_MONSTER_RADOBAAN",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Part", "LOC_PART_JAW"),
+                        new MonsterPartConfig("Part", "LOC_PART_BACK"),
+                        new MonsterPartConfig("Part", "LOC_PART_BONE_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_BONE_RIGHT")
+                    },
+                    1803.47f,
+                    new MonsterCrownConfig(CrownPreset.Alternate)
+                )
+            },
+            { // true
+                "em115_00",
+                new MonsterConfig("LOC_MONSTER_VAAL_HAZAK",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BACK"),
+                        new MonsterPartConfig("Part", "LOC_PART_CHEST"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WINGS")
+                    },
+                    2095.4f,
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    true
+                )
+            },
+            { // true
+                "em115_05",
+                new MonsterConfig("LOC_MONSTER_BLACKVEIL_VAAL_HAZAK",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BACK"),
+                        new MonsterPartConfig("Part", "LOC_PART_CHEST"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WINGS")
+                    },
+                    2095.4f,
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    true
+                )
+            },
+            { // true
+                "em116_00",
+                new MonsterConfig("LOC_MONSTER_DODOGAMA",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1111.11f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em117_00",
+                new MonsterConfig("LOC_MONSTER_KULVE_TAROTH",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_HORNS", true),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_HORNS_2", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HORNS"),
+                        new MonsterPartConfig("Part", "LOC_PART_CHEST"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LIMBS_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LIMBS_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Part", "LOC_PART_HORNS_GOLD"),
+                        new MonsterPartConfig("Part", "LOC_PART_MANE_GOLD"),
+                        new MonsterPartConfig("Part", "LOC_PART_CHEST_LEFT_GOLD"),
+                        new MonsterPartConfig("Part", "LOC_PART_CHEST_RIGHT_GOLD"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT_GOLD"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT_GOLD"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT_GOLD"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT_GOLD"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL_LEFT_GOLD"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL_RIGHT_GOLD")
+                    },
+                    4573.25f,
+                    null,
+                    true
+                )
+            },
+            { // true
+                "em118_00",
+                new MonsterConfig("LOC_MONSTER_BAZELGEUSE",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1928.38f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em118_05",
+                new MonsterConfig("LOC_MONSTER_SEETHING_BAZELGEUSE",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    1928.38f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em120_00",
+                new MonsterConfig("LOC_MONSTER_TZITZI_YA_KU",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    894.04f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em121_00",
+                new MonsterConfig("LOC_MONSTER_BEHEMOTH",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HORNS"),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    3423.65f,
+                    null,
+                    true
+                )
+            },
+            { // true
+                "em122_00",
+                new MonsterConfig("LOC_MONSTER_BEOTODUS",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD_SNOW"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY_SNOW"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL_SNOW")
+                    },
+                    1661.99f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em123_00",
+                new MonsterConfig("LOC_MONSTER_BANBARO",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_HORNS", true),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HORNS"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEG_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    2404.84f,
+                    new MonsterCrownConfig(CrownPreset.Standard)
+                )
+            },
+            { // true
+                "em124_00",
+                new MonsterConfig("LOC_MONSTER_VELKHANA",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD_ICE"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY_ICE"),
+                        new MonsterPartConfig("Part", "LOC_PART_WINGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_WINGS_ICE"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS_ICE"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS_ICE"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL_ICE")
+                    },
+                    2596.05f,
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    true
+                )
+            },
+            { // true
+                "em125_00",
+                new MonsterConfig("LOC_MONSTER_NAMIELLE",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_TAIL", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BACK"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_WINGS")
+                    },
+                    2048.25f,
+                    new MonsterCrownConfig(CrownPreset.Standard),
+                    true
+                )
+            },
+            { // true
+                "em126_00",
+                new MonsterConfig("LOC_MONSTER_SHARA_ISHVALDA",
+                    new MonsterPartConfig[]
+                    {
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_HEAD", true),
+                        new MonsterPartConfig("Part", "LOC_PART_NECK_LEFT_ROCK"),
+                        new MonsterPartConfig("Part", "LOC_PART_NECK_RIGHT_ROCK"),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD_ROCK"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL_ROCK"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT_ROCK"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT_ROCK"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT_ROCK"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT_ROCK"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS_ROCK"),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_WING_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_LEFT"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARM_RIGHT"),
+                        new MonsterPartConfig("Part", "LOC_PART_TAIL")
+                    },
+                    2910.91f,
+                    null,
+                    true
+                )
+            },
+            { // true
                 "em127_00",
                 new MonsterConfig("LOC_MONSTER_LESHEN",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_ANTLER_LEFT",  PartTags.RemovableHorns, true),
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_ANTLER_RIGHT", PartTags.RemovableHorns, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",                   PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",                   PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_LEGS",                   PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_ARMS",                   PartTags.Arms),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_ANTLER_LEFT", true),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_ANTLER_RIGHT", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_4"),
+                        new MonsterPartConfig("Part", "LOC_5"),
+                        new MonsterPartConfig("Part", "LOC_JAGRAS_SUMMONER")
                     },
-                    549.70f, 1f,
-                    null
+                    549.70f,
+                    null,
+                    true
                 )
             },
-            {
+            { // true
                 "em127_01",
                 new MonsterConfig("LOC_MONSTER_ANCIENT_LESHEN",
                     new MonsterPartConfig[]
                     {
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_ANTLER_LEFT",  PartTags.RemovableHorns, true),
-                        new MonsterPartConfig("LOC_REMOVABLE_PART_ANTLER_RIGHT", PartTags.RemovableHorns, true),
-                        new MonsterPartConfig("LOC_PART_HEAD",                   PartTags.Head),
-                        new MonsterPartConfig("LOC_PART_BODY",                   PartTags.Body),
-                        new MonsterPartConfig("LOC_PART_LEGS",                   PartTags.Legs),
-                        new MonsterPartConfig("LOC_PART_ARMS",                   PartTags.Arms),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_ANTLER_LEFT", true),
+                        new MonsterPartConfig("Removable", "LOC_REMOVABLE_PART_ANTLER_RIGHT", true),
+                        new MonsterPartConfig("Part", "LOC_PART_HEAD"),
+                        new MonsterPartConfig("Part", "LOC_PART_BODY"),
+                        new MonsterPartConfig("Part", "LOC_PART_LEGS"),
+                        new MonsterPartConfig("Part", "LOC_PART_ARMS"),
+                        new MonsterPartConfig("Part", "LOC_4"),
+                        new MonsterPartConfig("Part", "LOC_5"),
+                        new MonsterPartConfig("Part", "LOC_JAGRAS_SUMMONER")
                     },
-                    549.70f, 1f,
-                    null
+                    633.81f,
+                    null,
+                    true
                 )
             }
         };
-        
+        /*
         public MonsterStatusEffectConfig[] StatusEffects =
         {
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_POISON",       StatusEffectTags.Poison,      "08", "15C", "178", "17C", "1A4", "1A8"),
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_PARALYSIS",    StatusEffectTags.Paralysis,   "10", "15C", "178", "17C", "1A4", "1A8"),
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_SLEEP",        StatusEffectTags.Sleep,       "18", "15C", "178", "17C", "1A4", "1A8"),
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_BLAST",        StatusEffectTags.Blast,       "20", "15C", "178", "17C", "1A4", "1A8"),
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_MOUNT",        StatusEffectTags.Mount,       "28", "15C", "178", "17C", "1A4", "1A8"),
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_EXHAUST",      StatusEffectTags.Exhaust,     "30", "15C", "178", "17C", "1A4", "1A8"),
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_STUN",         StatusEffectTags.Stun,        "38", "15C", "178", "17C", "1A4", "1A8"),
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_TRANQUILIZE",  StatusEffectTags.Tranquilize, "40", "15C", "178", "17C", "1A4", "1A8"),
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_FLASH",        StatusEffectTags.Flash,       "48", "15C", "178", "17C", "1A4", "1A8"),
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_DUNG",         StatusEffectTags.Dung,        "58", "15C", "178", "17C", "1A4", "1A8"),
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_SHOCK_TRAP",   StatusEffectTags.ShockTrap,   "68", "15C", "178", "17C", "1A4", "1A8"),
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_PITFALL_TRAP", StatusEffectTags.PitfallTrap, "70", "15C", "178", "17C", "1A4", "1A8"),
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_ELDERSEAL",    StatusEffectTags.Elderseal,   "88", "15C", "178", "17C", "1A4", "1A8"),
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_RAGE",         StatusEffectTags.Rage,        null, "190", "180", "1A0", "18C", "198"),
-            new MonsterStatusEffectConfig("LOC_STATUS_EFFECT_FATIGUE",      StatusEffectTags.Fatigue,     null, "42C", "420", "424", "430",  null, true),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_POISON",       "08", "15C", "178", "17C", "1A4", "1A8"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_PARALYSIS",    "10", "15C", "178", "17C", "1A4", "1A8"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_SLEEP",        "18", "15C", "178", "17C", "1A4", "1A8"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_BLAST",        "20", "15C", "178", "17C", "1A4", "1A8"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_MOUNT",        "28", "15C", "178", "17C", "1A4", "1A8"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_EXHAUST",      "30", "15C", "178", "17C", "1A4", "1A8"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_STUN",         "38", "15C", "178", "17C", "1A4", "1A8"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_TRANQUILIZE",  "40", "15C", "178", "17C", "1A4", "1A8"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_FLASH",        "48", "15C", "178", "17C", "1A4", "1A8"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_KNOW_DOWN",    "48", "15C", "178", "17C", "1A4", "1A8"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_DUNG",         "58", "15C", "178", "17C", "1A4", "1A8"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_SHOCK_TRAP",   "68", "15C", "178", "17C", "1A4", "1A8"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_PITFALL_TRAP", "70", "15C", "178", "17C", "1A4", "1A8"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_ELDERSEAL",    "88", "15C", "178", "17C", "1A4", "1A8"),
+            new MonsterStatusEffectConfig("Rage",         "LOC_STATUS_EFFECT_RAGE",         null, "190", "180", "1A0", "18C", "198"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_FATIGUE",      null, "42C", "420", "424", "430",  null, true)
+        };
+        */
+
+        public MonsterStatusEffectConfig[] StatusEffects =
+        {
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_0"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_POISON"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_PARALYSIS"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_SLEEP"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_BLAST"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_MOUNT"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_EXHAUST"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_STUN"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_TRANQUILIZE"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_FLASH"), // 9
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_FLASH"), // 10
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_KNOW_DOWN"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_DUNG"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_PART_13"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_SHOCK_TRAP"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_PITFALL_TRAP"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_PART_16"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_PART_17"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_ELDERSEAL"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_SMOKING"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_PART_20"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_FELVYNE_KNOCK_DOWN_TRAP"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_CLAW_ATTACK", true),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_STATUS_EFFECT_VIOLATED"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_PART_24"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_PART_25"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_PART_26"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_PART_27"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_PART_28"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_PART_29"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_PART_30"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_PART_31"),
+            new MonsterStatusEffectConfig("StatusEffect", "LOC_PART_32"),
+
+            new MonsterStatusEffectConfig("Rage", "LOC_STATUS_EFFECT_RAGE"),
+            new MonsterStatusEffectConfig("Stamina", "LOC_STATUS_EFFECT_STAMINA"),
+            new MonsterStatusEffectConfig("Fatigue", "LOC_STATUS_EFFECT_FATIGUE"),
         };
     }
 }

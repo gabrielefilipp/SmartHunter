@@ -1,13 +1,16 @@
-﻿using SmartHunter.Core;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.Text;
+using System.Windows;
+using System.Xaml;
+using SmartHunter.Core;
 using SmartHunter.Game;
 using SmartHunter.Game.Data.ViewModels;
 using SmartHunter.Game.Helpers;
 using SmartHunter.Ui.Windows;
-using System;
-using System.IO;
-using System.Reflection;
-using System.Windows;
-using System.Xaml;
+using XamlReader = System.Windows.Markup.XamlReader;
 
 namespace SmartHunter
 {
@@ -20,15 +23,12 @@ namespace SmartHunter
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            //var culture = new System.Globalization.CultureInfo("es-ES");
-            //System.Globalization.CultureInfo.CurrentCulture = culture;
-            //System.Globalization.CultureInfo.CurrentUICulture = culture;
-
             // Initialize the console view model first thing so we can see any problems that may occur
             var consoleViewModel = ConsoleViewModel.Instance;
 
-            Log.WriteLine($"Started {Assembly.GetExecutingAssembly().GetName().Version}");
-            //Log.WriteLine($"Culture: {System.Globalization.CultureInfo.CurrentCulture.Name}");
+            var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            var fileVersionInfoVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
+            Log.WriteLine($"Started: Assembly Version: {assemblyVersion} | File Version: {fileVersionInfoVersion}");
 
             SetPerMonitorDpiAwareness();
 
@@ -39,7 +39,7 @@ namespace SmartHunter
             m_SkinFile.Changed += (s1, e1) => { LoadSkin(); };
             LoadSkin();
 
-            m_Overlay = new MhwOverlay(new ConsoleWindow(), new TeamWidgetWindow(), new MonsterWidgetWindow(), new PlayerWidgetWindow());
+            m_Overlay = new MhwOverlay(new ConsoleWindow(), new TeamWidgetWindow(), new MonsterWidgetWindow(), new PlayerWidgetWindow(), new DebugWidgetWindow());
 
             base.OnStartup(e);
         }
@@ -78,16 +78,16 @@ namespace SmartHunter
             {
                 ResourceDictionary resourceDictionary = null;
 
-                using (var streamReader = new StreamReader(m_SkinFile.FullPathFileName, System.Text.Encoding.UTF8))
+                using (var streamReader = new StreamReader(m_SkinFile.FullPathFileName, Encoding.UTF8))
                 {
                     var xmlReaderSettings = new XamlXmlReaderSettings
                     {
                         LocalAssembly = Assembly.GetExecutingAssembly()
                     };
 
-                    using (var xamlReader = new XamlXmlReader(streamReader.BaseStream, System.Windows.Markup.XamlReader.GetWpfSchemaContext(), xmlReaderSettings))
+                    using (var xamlReader = new XamlXmlReader(streamReader.BaseStream, XamlReader.GetWpfSchemaContext(), xmlReaderSettings))
                     {
-                        resourceDictionary = System.Windows.Markup.XamlReader.Load(xamlReader) as ResourceDictionary;
+                        resourceDictionary = XamlReader.Load(xamlReader) as ResourceDictionary;
                     }
                 }
 

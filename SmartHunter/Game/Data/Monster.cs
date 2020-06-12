@@ -1,21 +1,12 @@
-﻿using SmartHunter.Core;
-using SmartHunter.Core.Data;
-using SmartHunter.Game.Config;
-using SmartHunter.Game.Helpers;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using SmartHunter.Core;
+using SmartHunter.Core.Data;
+using SmartHunter.Game.Helpers;
 
 namespace SmartHunter.Game.Data
 {
-    public enum MonsterCrown
-    {
-        None,
-        Mini,
-        Silver,
-        Gold
-    }
-
     public class Monster : TimedVisibility
     {
         public ulong Address { get; private set; }
@@ -34,18 +25,14 @@ namespace SmartHunter.Game.Data
             }
         }
 
-        public string Name
-        {
-            get
-            {
-                return LocalizationHelper.GetMonsterName(Id);
-            }
-        }
+        public bool isElder => ConfigHelper.MonsterData.Values.Monsters.TryGetValue(Id, out var config) ? config.isElder : false;
+
+        public string Name => LocalizationHelper.GetMonsterName(Id);
 
         float m_SizeScale;
         public float SizeScale
         {
-            get { return m_SizeScale; }
+            get => m_SizeScale;
             set
             {
                 if (SetProperty(ref m_SizeScale, value))
@@ -57,64 +44,47 @@ namespace SmartHunter.Game.Data
             }
         }
 
-        public float ModifiedSizeScale
+        float m_ScaleModifier;
+        public float ScaleModifier
         {
-            get
+            get => m_ScaleModifier;
+            set
             {
-                float modifiedSizeScale = SizeScale;
-
-                MonsterConfig config = null;
-                if (ConfigHelper.MonsterData.Values.Monsters.TryGetValue(Id, out config))
+                if (SetProperty(ref m_ScaleModifier, value))
                 {
-                    modifiedSizeScale /= config.ScaleModifier;
+                    NotifyPropertyChanged(nameof(ModifiedSizeScale));
+                    NotifyPropertyChanged(nameof(Size));
+                    NotifyPropertyChanged(nameof(Crown));
                 }
-
-                return modifiedSizeScale;
             }
         }
 
-        public float Size
-        {
-            get
-            {
-                float size = 0; 
+        public float ModifiedSizeScale => (float)Math.Round((decimal)(SizeScale / ScaleModifier), 2);
 
-                MonsterConfig config = null;
-                if (ConfigHelper.MonsterData.Values.Monsters.TryGetValue(Id, out config))
-                {
-                    size = config.BaseSize * ModifiedSizeScale;
-                }
-
-                return size;
-            }
-        }
+        public float Size => ConfigHelper.MonsterData.Values.Monsters.TryGetValue(Id, out var config) ? config.BaseSize * ModifiedSizeScale : 0;
 
         public MonsterCrown Crown
         {
             get
             {
-                MonsterCrown crown = MonsterCrown.None;
-
-                MonsterConfig config = null;
-                if (ConfigHelper.MonsterData.Values.Monsters.TryGetValue(Id, out config) && config.Crowns != null)
+                if (ConfigHelper.MonsterData.Values.Monsters.TryGetValue(Id, out var config) && config.Crowns != null)
                 {
-                    int modifiedSizeScale = (int)Math.Round(ModifiedSizeScale * 100, 0);
+                    var modifiedSizeScale = ModifiedSizeScale;
 
-                    if (modifiedSizeScale <= (int)Math.Round(config.Crowns.Mini * 100, 0))
+                    if (modifiedSizeScale <= config.Crowns.Mini)
                     {
-                        crown = MonsterCrown.Mini;
+                        return MonsterCrown.Mini;
                     }
-                    else if (modifiedSizeScale >= (int)Math.Round(config.Crowns.Gold * 100, 0))
+                    else if (modifiedSizeScale >= config.Crowns.Gold)
                     {
-                        crown = MonsterCrown.Gold;
+                        return MonsterCrown.Gold;
                     }
-                    else if (modifiedSizeScale >= (int)Math.Round(config.Crowns.Silver * 100, 0))
+                    else if (modifiedSizeScale >= config.Crowns.Silver)
                     {
-                        crown = MonsterCrown.Silver;
+                        return MonsterCrown.Silver;
                     }
                 }
-
-                return crown;
+                return MonsterCrown.None;
             }
         }
 
@@ -122,20 +92,15 @@ namespace SmartHunter.Game.Data
         public ObservableCollection<MonsterPart> Parts { get; private set; }
         public ObservableCollection<MonsterStatusEffect> StatusEffects { get; private set; }
 
-        public bool IsVisible
-        {
-            get
-            {
-                return IsIncluded(Id) && IsTimeVisible(ConfigHelper.Main.Values.Overlay.MonsterWidget.ShowUnchangedMonsters, ConfigHelper.Main.Values.Overlay.MonsterWidget.HideMonstersAfterSeconds);
-            }
-        }
+        public bool IsVisible => IsIncluded(Id) && IsTimeVisible(ConfigHelper.Main.Values.Overlay.MonsterWidget.ShowUnchangedMonsters, ConfigHelper.Main.Values.Overlay.MonsterWidget.HideMonstersAfterSeconds);
 
-        public Monster(ulong address, string id, float maxHealth, float currentHealth, float sizeScale)
+        public Monster(ulong address, string id, float maxHealth, float currentHealth, float sizeScale, float scaleModifier)
         {
             Address = address;
             m_Id = id;
             Health = new Progress(maxHealth, currentHealth);
             m_SizeScale = sizeScale;
+            m_ScaleModifier = scaleModifier;
 
             Parts = new ObservableCollection<MonsterPart>();
             StatusEffects = new ObservableCollection<MonsterStatusEffect>();
@@ -143,7 +108,7 @@ namespace SmartHunter.Game.Data
 
         public MonsterPart UpdateAndGetPart(ulong address, bool isRemovable, float maxHealth, float currentHealth, int timesBrokenCount)
         {
-            MonsterPart part = Parts.SingleOrDefault(collectionPart => collectionPart.Address == address);
+            var part = Parts.SingleOrDefault(collectionPart => collectionPart.Address == address);
             if (part != null)
             {
                 part.IsRemovable = isRemovable;
@@ -164,11 +129,13 @@ namespace SmartHunter.Game.Data
             return part;
         }
 
-        public MonsterStatusEffect UpdateAndGetStatusEffect(int index, float maxBuildup, float currentBuildup, float maxDuration, float currentDuration, int timesActivatedCount)
+        public MonsterStatusEffect UpdateAndGetStatusEffect(ulong address, int index, float maxBuildup, float currentBuildup, float maxDuration, float currentDuration, int timesActivatedCount)
         {
-            MonsterStatusEffect statusEffect = StatusEffects.SingleOrDefault(collectionStatusEffect => collectionStatusEffect.Index == index);
+            var statusEffect = StatusEffects.SingleOrDefault(collectionStatusEffect => collectionStatusEffect.Index == index); // TODO: check address???
+            
             if (statusEffect != null)
             {
+                //statusEffect.Address = Address;
                 statusEffect.Duration.Max = maxDuration;
                 statusEffect.Duration.Current = currentDuration;
                 statusEffect.Buildup.Max = maxBuildup;
@@ -177,7 +144,7 @@ namespace SmartHunter.Game.Data
             }
             else
             {
-                statusEffect = new MonsterStatusEffect(this, index, maxBuildup, currentBuildup, maxDuration, currentDuration, timesActivatedCount);
+                statusEffect = new MonsterStatusEffect(this, address, index, maxBuildup, currentBuildup, maxDuration, currentDuration, timesActivatedCount);
                 statusEffect.Changed += PartOrStatusEffect_Changed;
 
                 StatusEffects.Add(statusEffect);
@@ -202,14 +169,8 @@ namespace SmartHunter.Game.Data
             }
         }
 
-        public static bool IsIncluded(string monsterId)
-        {
-            return ConfigHelper.Main.Values.Overlay.MonsterWidget.MatchMonsterId(monsterId);
-        }
+        public static bool IsIncluded(string monsterId) => ConfigHelper.Main.Values.Overlay.MonsterWidget.MatchIncludeMonsterIdRegex(monsterId);
 
-        private void PartOrStatusEffect_Changed(object sender, GenericEventArgs<DateTimeOffset> e)
-        {
-            UpdateLastChangedTime();
-        }
+        private void PartOrStatusEffect_Changed(object sender, GenericEventArgs<DateTimeOffset> e) => UpdateLastChangedTime();
     }
 }

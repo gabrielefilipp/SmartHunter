@@ -1,12 +1,14 @@
-﻿using SmartHunter.Game.Data;
-using SmartHunter.Game.Data.ViewModels;
+﻿using System;
+using System.Globalization;
 using System.Windows.Data;
+using SmartHunter.Game.Data;
+using SmartHunter.Game.Data.ViewModels;
 
 namespace SmartHunter.Ui.Converters
 {
     public class PlayerToPlayerIndexConverter : IValueConverter
     {
-        public object Convert(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var player = value as Player;
 
@@ -18,9 +20,9 @@ namespace SmartHunter.Ui.Converters
             return Binding.DoNothing;
         }
 
-        public object ConvertBack(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

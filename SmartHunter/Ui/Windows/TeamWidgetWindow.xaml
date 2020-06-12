@@ -1,4 +1,4 @@
-﻿<windows:WidgetWindow
+<windows:WidgetWindow
         x:Class="SmartHunter.Ui.Windows.TeamWidgetWindow"
         Left="{Binding TeamWidget.X, Mode=TwoWay}"
         Top="{Binding TeamWidget.Y, Mode=TwoWay}"
@@ -17,14 +17,16 @@
         d:DataContext="{x:Static viewModels:OverlayViewModel.Instance}"        
         MouseDown="WidgetWindow_MouseDown"
         MouseWheel="WidgetWindow_MouseWheel"                           
-        SizeToContent="WidthAndHeight"
+        ShowActivated="False"        
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ShowInTaskbar="False"
+        Background="#01000000"        
+        SizeToContent="WidthAndHeight" 
         Width="Auto"
         Height="Auto">
-    <Window.Background>
-        <SolidColorBrush Color="{DynamicResource A_Color_Widget_Background}" />
-    </Window.Background>
 
-    <Grid Name="Root" UseLayoutRounding="True" Margin="25" MinWidth="50" MinHeight="50" Background="#01000000">
+    <Grid Name="Root" UseLayoutRounding="True" Margin="25" MinWidth="50" MinHeight="50">
         <Grid>
             <Grid.LayoutTransform>
                 <ScaleTransform ScaleX="{Binding TeamWidget.Scale}" ScaleY="{Binding TeamWidget.Scale}" />

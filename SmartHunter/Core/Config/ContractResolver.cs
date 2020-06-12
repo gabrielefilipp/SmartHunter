@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace SmartHunter.Core.Config
 {

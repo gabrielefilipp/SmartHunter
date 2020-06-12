@@ -1,8 +1,7 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    mc:Ignorable="d"
                     
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:pfComponentModel="clr-namespace:System.ComponentModel;assembly=PresentationFramework"
@@ -12,6 +11,9 @@
                     xmlns:coreData="clr-namespace:SmartHunter.Core.Data"
                     xmlns:data="clr-namespace:SmartHunter.Game.Data"
                     xmlns:widgetContexts="clr-namespace:SmartHunter.Game.Data.WidgetContexts"
+                    xmlns:Windows="clr-namespace:SmartHunter.Ui.Windows"
+                    mc:Ignorable="d"
+                    
                     >
 
     <!--Base Resources-->
@@ -27,11 +29,12 @@
     <converters:EnumComparisonConverter x:Key="A_Converter_EnumComparison" />
     <converters:ColorTransformConverter x:Key="A_Converter_BackgroundColorTransform" SaturationAdjustment="-0.8" BrightnessAdjustment="0.66" OpacityOverride="0.3" />
     <converters:StringFormatConverter x:Key="A_Converter_StringFormat" />
-    <converters:StringArrayContainsConverter x:Key="A_Converter_StringArrayContains" />
-    
+    <converters:NumberToCenteredMarginConverter x:Key="A_Converter_NumberToCenteredMargin" />
+    <converters:WeaponTypeToNameConverter x:Key="A_Converter_WeaponTypeToName" />
+
     <Color x:Key="A_Color_Widget_Background">#00000000</Color>
     <system:Double x:Key="A_Double_Widget_Opacity">1</system:Double>
-    
+
     <Color x:Key="A_Color_Player_0">#BB3333</Color>
     <Color x:Key="A_Color_Player_1">#3366CC</Color>
     <Color x:Key="A_Color_Player_2">#CCBB11</Color>
@@ -41,12 +44,12 @@
     <Color x:Key="A_Color_Monster_Part_Bar">#CC0000</Color>
     <Color x:Key="A_Color_Monster_StatusEffect_Bar">#00CCCC</Color>
 
-    <Color x:Key="A_Color_PlayerStatusEffect_Buff">#DAFDBC</Color>
-    <Color x:Key="A_Color_PlayerStatusEffect_Debuff">#EC7A7A</Color>
-    <Color x:Key="A_Color_PlayerStatusEffect_HuntingHorn">#FFE1A9</Color>
-    <Color x:Key="A_Color_PlayerStatusEffect_CoralOrchestra">#B0D0FF</Color>
-    <Color x:Key="A_Color_PlayerStatusEffect_Equipment">#FFFFFFFF</Color>
-    <Color x:Key="A_Color_PlayerStatusEffect_Weapon">#FFFFFFFF</Color>
+    <Color x:Key="A_Color_PlayerStatusEffect_Group_Horn">#FFE1A9</Color>
+    <Color x:Key="A_Color_PlayerStatusEffect_Group_Coral">#B0D0FF</Color>
+    <Color x:Key="A_Color_PlayerStatusEffect_Group_Debuff">#EC7A7A</Color>
+    <Color x:Key="A_Color_PlayerStatusEffect_Group_Buff">#DAFDBC</Color>
+    <Color x:Key="A_Color_PlayerStatusEffect_Group_Equipment">#FFFFFFFF</Color>
+    <Color x:Key="A_Color_PlayerStatusEffect_Group_Weapon">#FFFFFFFF</Color>
 
     <Color x:Key="A_Color_Crown_Mini_Body">#eed000</Color>
     <Color x:Key="A_Color_Crown_Mini_Gem">#00dd00</Color>
@@ -61,10 +64,12 @@
     <TransformGroup x:Key="A_Transform_DropShadow">
         <TranslateTransform X="1.5" Y="1.5" />
     </TransformGroup>
-    
+
+    <DropShadowEffect x:Key="A_Effect_DropShadow" ShadowDepth="1" Direction="-45" Color="Black" Opacity="0.66" BlurRadius="1" RenderingBias="Quality" />
+
     <FontFamily x:Key="Roboto">pack://application:,,,/Ui/Fonts/#Roboto</FontFamily>
 
-    <Style x:Key="A_Style_TextBlock_Heading" TargetType="TextBlock">
+    <Style x:Key="A_Style_TextBlock_Heading" TargetType="{x:Type TextBlock}">
         <Setter Property="FontFamily" Value="{StaticResource Roboto}" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="FontSize" Value="20" />
@@ -74,16 +79,23 @@
         <Setter Property="LineHeight" Value="20" />
     </Style>
 
-    <Style x:Key="A_Style_TextBlock_Standard" TargetType="TextBlock" BasedOn="{StaticResource A_Style_TextBlock_Heading}">
+    <Style x:Key="A_Style_TextBlock_Standard" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource A_Style_TextBlock_Heading}">
         <Setter Property="FontWeight" Value="Medium" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="LineHeight" Value="16" />
     </Style>
 
+    <Style x:Key="A_Style_TextBlock_Standard_Centered" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource A_Style_TextBlock_Heading}">
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="LineHeight" Value="13" />
+        <Setter Property="TextAlignment" Value="Center" />
+    </Style>
+
     <DataTemplate x:Key="A_DataTemplate_BarProgress">
         <Grid>
-            <Grid Name="BarBackground" Background="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentControl}, Converter={StaticResource A_Converter_BackgroundColorTransform}}" />
-            <Grid HorizontalAlignment="Left" Name="BarForeground" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ContentControl}}" Background="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentControl}}">
+            <Grid x:Name="BarBackground" Background="{Binding Foreground, Converter={StaticResource A_Converter_BackgroundColorTransform}, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}, Mode=FindAncestor}}" />
+            <Grid HorizontalAlignment="Left" x:Name="BarForeground" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Background="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}, Mode=FindAncestor}}">
                 <Grid.LayoutTransform>
                     <ScaleTransform ScaleX="{Binding .}" />
                 </Grid.LayoutTransform>
@@ -105,19 +117,19 @@
     <DataTemplate x:Key="A_DataTemplate_CircleProgress" DataType="{x:Type coreData:Progress}">
         <Viewbox>
             <Grid Width="14" Height="14">
-                <Ellipse StrokeThickness="4" Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentControl}, Converter={StaticResource A_Converter_BackgroundColorTransform}}" />
+                <Ellipse StrokeThickness="4" Stroke="{Binding Foreground, Converter={StaticResource A_Converter_BackgroundColorTransform}, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}, Mode=FindAncestor}}" />
 
                 <Canvas Width="0" Height="0" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
                     <Canvas.RenderTransform>
                         <TranslateTransform X="-5" Y="-5" />
                     </Canvas.RenderTransform>
 
-                    <Path StrokeThickness="4" Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentControl}}">
+                    <Path StrokeThickness="4" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}, Mode=FindAncestor}}">
                         <Path.Data>
                             <PathGeometry>
                                 <PathFigure StartPoint="5,0">
                                     <ArcSegment RotationAngle="0" SweepDirection="Clockwise" Size="5,5" 
-                                                Point="{Binding Angle, Converter={StaticResource A_Converter_AngleToPoint}, ConverterParameter=5}"
+                                                Point="{Binding Angle, ConverterParameter=5, Converter={StaticResource A_Converter_AngleToPoint}}"
                                                 IsLargeArc="{Binding Angle, Converter={StaticResource A_Converter_AngleToIsLargeArc}}" />
                                 </PathFigure>
                             </PathGeometry>
@@ -132,15 +144,15 @@
         <Viewbox>
             <Canvas RenderTransform="1.0, 0.0, 0.0, 1.0, 0, 0" Width="512.001" Height="512.001">
                 <!-- Rim -->
-                <Path Data="F1 M512.001,512.001z M0,0z M471.688,448.561L40.311,448.561C31.475,448.561,24.311,441.397,24.311,432.562L24.311,350.881C24.311,342.045,31.475,334.882,40.311,334.882L471.687,334.882C480.523,334.882,487.687,342.046,487.687,350.881L487.687,432.562C487.687,441.398,480.525,448.561,471.688,448.561z" Fill="{Binding Background, RelativeSource={RelativeSource AncestorType=ContentControl}}" />
-                <Path Data="F1 M512.001,512.001z M0,0z M471.689,334.882L256,334.882 256,448.562 471.688,448.562C480.524,448.562,487.688,441.398,487.688,432.563L487.688,350.882C487.688,342.045,480.525,334.882,471.689,334.882z" Fill="{Binding Background, RelativeSource={RelativeSource AncestorType=ContentControl}}" />
+                <Path Data="F1 M512.001,512.001z M0,0z M471.688,448.561L40.311,448.561C31.475,448.561,24.311,441.397,24.311,432.562L24.311,350.881C24.311,342.045,31.475,334.882,40.311,334.882L471.687,334.882C480.523,334.882,487.687,342.046,487.687,350.881L487.687,432.562C487.687,441.398,480.525,448.561,471.688,448.561z" Fill="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" />
+                <Path Data="F1 M512.001,512.001z M0,0z M471.689,334.882L256,334.882 256,448.562 471.688,448.562C480.524,448.562,487.688,441.398,487.688,432.563L487.688,350.882C487.688,342.045,480.525,334.882,471.689,334.882z" Fill="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" />
 
                 <!-- Body -->
-                <Path Data="F1 M512.001,512.001z M0,0z M483.949,100.035L373.852,225.934 269.275,70.501C262.941,61.088,249.062,61.085,242.725,70.501L138.148,225.934 28.051,100.035C17.811,88.327,-1.473,96.733,0.0889999999999986,112.178L24.311,351.689 24.311,366.882C45.309,366.882,470.842,366.882,487.686,366.882L487.686,351.689 511.909,112.178C513.474,96.729,494.186,88.329,483.949,100.035z" Fill="{Binding Background, RelativeSource={RelativeSource AncestorType=ContentControl}}" />
-                <Path Data="F1 M512.001,512.001z M0,0z M483.949,100.035L373.852,225.934 269.275,70.501C266.108,65.794,261.054,63.44,256.001,63.44L256.001,366.88C367.636,366.88,479.227,366.88,487.689,366.88L487.689,351.687 511.912,112.176C513.474,96.729,494.186,88.329,483.949,100.035z" Fill="{Binding Background, RelativeSource={RelativeSource AncestorType=ContentControl}}" />
+                <Path Data="F1 M512.001,512.001z M0,0z M483.949,100.035L373.852,225.934 269.275,70.501C262.941,61.088,249.062,61.085,242.725,70.501L138.148,225.934 28.051,100.035C17.811,88.327,-1.473,96.733,0.0889999999999986,112.178L24.311,351.689 24.311,366.882C45.309,366.882,470.842,366.882,487.686,366.882L487.686,351.689 511.909,112.178C513.474,96.729,494.186,88.329,483.949,100.035z" Fill="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" />
+                <Path Data="F1 M512.001,512.001z M0,0z M483.949,100.035L373.852,225.934 269.275,70.501C266.108,65.794,261.054,63.44,256.001,63.44L256.001,366.88C367.636,366.88,479.227,366.88,487.689,366.88L487.689,351.687 511.912,112.176C513.474,96.729,494.186,88.329,483.949,100.035z" Fill="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" />
                 <!-- Gem -->
-                <Path Data="F1 M512.001,512.001z M0,0z M256,308.407C227.366,308.407 204.071,285.112 204.071,256.478 204.071,227.844 227.366,204.549 256,204.549 284.635,204.549 307.93,227.844 307.93,256.478 307.931,285.112 284.634,308.407 256,308.407z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ContentControl}}" />
-                <Path Data="F1 M512.001,512.001z M0,0z M307.929,256.478C307.929,227.844,284.634,204.549,256,204.549L256,308.407C284.634,308.407,307.929,285.111,307.929,256.478z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ContentControl}}" />
+                <Path Data="F1 M512.001,512.001z M0,0z M256,308.407C227.366,308.407 204.071,285.112 204.071,256.478 204.071,227.844 227.366,204.549 256,204.549 284.635,204.549 307.93,227.844 307.93,256.478 307.931,285.112 284.634,308.407 256,308.407z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" />
+                <Path Data="F1 M512.001,512.001z M0,0z M307.929,256.478C307.929,227.844,284.634,204.549,256,204.549L256,308.407C284.634,308.407,307.929,285.111,307.929,256.478z" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" />
             </Canvas>
         </Viewbox>
     </DataTemplate>
@@ -181,7 +193,7 @@
             <Grid.OpacityMask>
                 <VisualBrush Visual="{Binding ElementName=Border1}" />
             </Grid.OpacityMask>
-            <Border x:Name="Border1" CornerRadius="3" Background="{Binding Background, RelativeSource={RelativeSource AncestorType=ContentControl}}">
+            <Border x:Name="Border1" CornerRadius="3" Background="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}">
                 <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3 2 3 1">
                     <TextBlock Text="{Binding .}" Style="{StaticResource A_Style_TextBlock_Heading}" Foreground="{StaticResource A_Brush_DropShadow}" FontSize="11" LineHeight="11">
                         <TextBlock.RenderTransform>
@@ -191,7 +203,7 @@
                         </TextBlock.RenderTransform>
                     </TextBlock>
 
-                    <TextBlock Text="{Binding .}" Style="{StaticResource A_Style_TextBlock_Heading}" FontSize="12" LineHeight="12" Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ContentControl}, FallbackValue=White}" />
+                    <TextBlock Text="{Binding .}" Style="{StaticResource A_Style_TextBlock_Heading}" FontSize="12" LineHeight="12" Foreground="{Binding Foreground, FallbackValue=White, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" />
                 </Grid>
             </Border>
         </Grid>
@@ -248,7 +260,7 @@
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
-        
+
         <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Pulse" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
             <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
             <EasingDoubleKeyFrame KeyTime="00:00:00.25" Value="1">
@@ -279,53 +291,42 @@
     </Storyboard>
 
     <DataTemplate DataType="{x:Type data:MonsterStatusEffect}">
-        <StackPanel Name="Root" Margin="0 9 0 0" Visibility="Collapsed" Opacity="0">
+        <StackPanel x:Name="Root" Margin="0 9 0 0" Visibility="Collapsed" Opacity="0">
             <DockPanel>
                 <Grid>
-                    <TextBlock Name="NameBlockShadow" Text="{Binding Name}" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}" />
-                    <TextBlock Name="NameBlock" Text="{Binding Name}" Style="{StaticResource A_Style_TextBlock_Standard}" />
+                    <TextBlock x:Name="NameBlockShadow" Text="{Binding Name}" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}" />
+                    <TextBlock x:Name="NameBlock" Text="{Binding Name}" Style="{StaticResource A_Style_TextBlock_Standard}" />
                 </Grid>
 
-                <ContentControl Name="TimesActivatedGraphic" Visibility="Collapsed" Margin="6 -3 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" ContentTemplate="{StaticResource A_DataTemplate_SquareInfoGraphic}">
-                    <ContentControl.Content>
-                        <MultiBinding ConverterParameter="{}{0}" Converter="{StaticResource A_Converter_StringFormat}">
-                            <Binding Path="TimesActivatedCount" Mode="OneWay" />
-                        </MultiBinding>
-                    </ContentControl.Content>
+                <ContentControl x:Name="TimesActivatedGraphic" Visibility="Collapsed" Margin="6 -3 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" ContentTemplate="{StaticResource A_DataTemplate_SquareInfoGraphic}">
                     <ContentControl.Background>
                         <SolidColorBrush Color="{Binding Source={StaticResource A_Color_Monster_StatusEffect_Bar}}" />
                     </ContentControl.Background>
+                    <MultiBinding ConverterParameter="{}{0}" Converter="{StaticResource A_Converter_StringFormat}">
+                        <Binding Path="TimesActivatedCount" Mode="OneWay" />
+                    </MultiBinding>
                 </ContentControl>
 
-                <Grid Name="IsActiveContainer" Margin="6 -3 0 0" Visibility="Collapsed">
-                    <Ellipse Name="Pulse" Width="1" Height="1" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5 0.5">
+                <Grid x:Name="IsActiveContainer" Margin="6 -3 0 0" Visibility="Collapsed">
+                    <Ellipse x:Name="Pulse" Width="1" Height="1" VerticalAlignment="Center" HorizontalAlignment="Center" RenderTransformOrigin="0.5 0.5" Fill="#FFFFF300">
                         <Ellipse.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="1" ScaleY="1" />
                             </TransformGroup>
                         </Ellipse.RenderTransform>
-                        <Ellipse.Fill>
-                            <SolidColorBrush Color="#FFFFF300" />
-                        </Ellipse.Fill>
                     </Ellipse>
-                    
-                    <ContentControl Name="IsActiveGraphic" Width="13" Content="!" VerticalAlignment="Center" HorizontalAlignment="Left" ContentTemplate="{StaticResource A_DataTemplate_SquareInfoGraphic}" RenderTransformOrigin="0.5 0.5">
+
+                    <ContentControl x:Name="IsActiveGraphic" Width="13" Content="!" VerticalAlignment="Center" HorizontalAlignment="Left" ContentTemplate="{StaticResource A_DataTemplate_SquareInfoGraphic}" RenderTransformOrigin="0.5 0.5" Background="#FFEED76F" Foreground="Black">
                         <ContentControl.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="1" ScaleY="1" />
                             </TransformGroup>
                         </ContentControl.RenderTransform>
-                        <ContentControl.Background>
-                            <SolidColorBrush Color="#FFEED76F" />
-                        </ContentControl.Background>
-                        <ContentControl.Foreground>
-                            <SolidColorBrush Color="Black" />
-                        </ContentControl.Foreground>
                     </ContentControl>
                 </Grid>
 
                 <Grid HorizontalAlignment="Right" Margin="12 0 0 0">
-                    <TextBlock Name="BuildupBlockShadow" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}">
+                    <TextBlock x:Name="BuildupBlockShadow" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0:0}/{1:0} ({2})">
                                 <Binding Path="Buildup.Current" Mode="OneWay" />
@@ -334,7 +335,7 @@
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
-                    <TextBlock Name="BuildupBlock" Style="{StaticResource A_Style_TextBlock_Standard}">
+                    <TextBlock x:Name="BuildupBlock" Style="{StaticResource A_Style_TextBlock_Standard}">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0:0}/{1:0} ({2})">
                                 <Binding Path="Buildup.Current" Mode="OneWay" />
@@ -344,7 +345,7 @@
                         </TextBlock.Text>
                     </TextBlock>
 
-                    <TextBlock Name="DurationBlockShadow" Visibility="Collapsed" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}">
+                    <TextBlock x:Name="DurationBlockShadow" Visibility="Collapsed" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0:0}/{1:0} ({2})">
                                 <Binding Path="Duration.Current" Mode="OneWay" />
@@ -353,7 +354,7 @@
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
-                    <TextBlock Name="DurationBlock" Visibility="Collapsed" Style="{StaticResource A_Style_TextBlock_Standard}">
+                    <TextBlock x:Name="DurationBlock" Visibility="Collapsed" Style="{StaticResource A_Style_TextBlock_Standard}">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0:0}/{1:0} ({2})">
                                 <Binding Path="Duration.Current" Mode="OneWay" />
@@ -365,7 +366,7 @@
                 </Grid>
             </DockPanel>
 
-            <ContentControl Name="Bar" Content="{Binding Buildup.Fraction}" ContentTemplate="{StaticResource A_DataTemplate_BarProgress}" Height="3" Margin="0 2 0 0">
+            <ContentControl x:Name="Bar" Content="{Binding Buildup.Fraction}" ContentTemplate="{StaticResource A_DataTemplate_BarProgress}" Height="3" Margin="0 2 0 0">
                 <ContentControl.Foreground>
                     <SolidColorBrush Color="{StaticResource A_Color_Monster_StatusEffect_Bar}" />
                 </ContentControl.Foreground>
@@ -378,21 +379,21 @@
                 <Setter TargetName="Root" Property="Opacity" Value="1" />
             </Trigger>
 
-            <DataTrigger Binding="{Binding DataContext.ShowBars, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False">
+            <DataTrigger Binding="{Binding DataContext.ShowBars, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False">
                 <Setter TargetName="Bar" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
 
             <DataTrigger Binding="{Binding IsVisible}" Value="True">
                 <DataTrigger.EnterActions>
                     <StopStoryboard BeginStoryboardName="Hide" />
-                    <BeginStoryboard Name="Show" Storyboard="{StaticResource A_Storyboard_Show}" />
+                    <BeginStoryboard x:Name="Show" Storyboard="{StaticResource A_Storyboard_Show}" />
                 </DataTrigger.EnterActions>
             </DataTrigger>
 
             <DataTrigger Binding="{Binding IsVisible}" Value="False">
                 <DataTrigger.EnterActions>
                     <StopStoryboard BeginStoryboardName="Show" />
-                    <BeginStoryboard Name="Hide" Storyboard="{StaticResource A_Storyboard_Hide}" />
+                    <BeginStoryboard x:Name="Hide" Storyboard="{StaticResource A_Storyboard_Hide}" />
                 </DataTrigger.EnterActions>
             </DataTrigger>
 
@@ -400,17 +401,13 @@
                 <Setter TargetName="TimesActivatedGraphic" Property="Visibility" Value="Visible" />
             </DataTrigger>
 
-            <!--Style based on status effect tags example-->
-            <!--<DataTrigger Binding="{Binding Tags, Converter={StaticResource A_Converter_StringArrayContains}, ConverterParameter=Behavior}" Value="True">
-                <Setter TargetName="NameBlock" Property="Foreground" Value="Red" />
-            </DataTrigger>-->
-
-            <!--When the UI needs to show the duration timer instead of the buildup timer-->
+            <!--When the UI needs to show the duration timer instead of the buildup timer with NO animations-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Duration.Fraction, Converter={StaticResource A_Converter_NumberNotEqual}, ConverterParameter=1}" Value="True" />
-                    <Condition Binding="{Binding Duration.Fraction, Converter={StaticResource A_Converter_NumberNotEqual}, ConverterParameter=0}" Value="True" />
-                    <Condition Binding="{Binding Duration.Max, Converter={StaticResource A_Converter_NumberNotEqual}, ConverterParameter=0}" Value="True" />
+                    <Condition Binding="{Binding Duration.Fraction, ConverterParameter=1, Converter={StaticResource A_Converter_NumberNotEqual}}" Value="True" />
+                    <Condition Binding="{Binding Duration.Fraction, ConverterParameter=0, Converter={StaticResource A_Converter_NumberNotEqual}}" Value="True" />
+                    <Condition Binding="{Binding Duration.Max, ConverterParameter=0, Converter={StaticResource A_Converter_NumberNotEqual}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.UseAnimations, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="BuildupBlockShadow" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="BuildupBlock" Property="Visibility" Value="Collapsed" />
@@ -420,17 +417,37 @@
                 <Setter TargetName="Bar" Property="Content" Value="{Binding Duration.Fraction}" />
 
                 <Setter TargetName="IsActiveContainer" Property="Visibility" Value="Visible" />
+            </MultiDataTrigger>
+
+            <!--When the UI needs to show the duration timer instead of the buildup timer with animations-->
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding Duration.Fraction, ConverterParameter=1, Converter={StaticResource A_Converter_NumberNotEqual}}" Value="True" />
+                    <Condition Binding="{Binding Duration.Fraction, ConverterParameter=0, Converter={StaticResource A_Converter_NumberNotEqual}}" Value="True" />
+                    <Condition Binding="{Binding Duration.Max, ConverterParameter=0, Converter={StaticResource A_Converter_NumberNotEqual}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.UseAnimations, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
+                </MultiDataTrigger.Conditions>
 
                 <MultiDataTrigger.EnterActions>
-                    <BeginStoryboard Name="BeginActiveStoryboard" Storyboard="{StaticResource A_Storyboard_StatusEffect_Active}" />
+                    <BeginStoryboard x:Name="BeginActiveStoryboard" Storyboard="{StaticResource A_Storyboard_StatusEffect_Active}" />
                 </MultiDataTrigger.EnterActions>
+
+                <Setter TargetName="BuildupBlockShadow" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="BuildupBlock" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="DurationBlockShadow" Property="Visibility" Value="Visible" />
+                <Setter TargetName="DurationBlock" Property="Visibility" Value="Visible" />
+
+                <Setter TargetName="Bar" Property="Content" Value="{Binding Duration.Fraction}" />
+
+                <Setter TargetName="IsActiveContainer" Property="Visibility" Value="Visible" />
+
             </MultiDataTrigger>
 
             <!--Show Numbers AND Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="BuildupBlockShadow" Property="Text">
                     <Setter.Value>
@@ -473,8 +490,8 @@
             <!--Show Numbers NOT Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="BuildupBlockShadow" Property="Text">
                     <Setter.Value>
@@ -517,8 +534,8 @@
             <!--Show NOT Numbers AND Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="BuildupBlockShadow" Property="Text">
                     <Setter.Value>
@@ -561,8 +578,8 @@
             <!--Show NOT Numbers NOT Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="BuildupBlockShadow" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="BuildupBlock" Property="Visibility" Value="Collapsed" />
@@ -573,26 +590,24 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type data:MonsterPart}">
-        <StackPanel Name="Root" Margin="0 9 0 0" Visibility="Collapsed" Opacity="0">
+        <StackPanel x:Name="Root" Margin="0 9 0 0" Visibility="Collapsed" Opacity="0">
             <DockPanel>
                 <Grid>
-                    <TextBlock Name="NameBlockShadow" Text="{Binding Name}" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}" />
-                    <TextBlock Name="NameBlock" Text="{Binding Name}" Style="{StaticResource A_Style_TextBlock_Standard}" />
+                    <TextBlock x:Name="NameBlockShadow" Text="{Binding Name}" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}" />
+                    <TextBlock x:Name="NameBlock" Text="{Binding Name}" Style="{StaticResource A_Style_TextBlock_Standard}" />
                 </Grid>
 
-                <ContentControl Name="TimesBrokenGraphic" Visibility="Collapsed" Margin="6 -3 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" ContentTemplate="{StaticResource A_DataTemplate_SquareInfoGraphic}">
-                    <ContentControl.Content>
-                        <MultiBinding ConverterParameter="{}{0}" Converter="{StaticResource A_Converter_StringFormat}">
-                            <Binding Path="TimesBrokenCount" Mode="OneWay" />
-                        </MultiBinding>
-                    </ContentControl.Content>
+                <ContentControl x:Name="TimesBrokenGraphic" Visibility="Collapsed" Margin="6 -3 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" ContentTemplate="{StaticResource A_DataTemplate_SquareInfoGraphic}">
                     <ContentControl.Background>
                         <SolidColorBrush Color="{Binding Source={StaticResource A_Color_Monster_Part_Bar}}" />
                     </ContentControl.Background>
+                    <MultiBinding ConverterParameter="{}{0}" Converter="{StaticResource A_Converter_StringFormat}">
+                        <Binding Path="TimesBrokenCount" Mode="OneWay" />
+                    </MultiBinding>
                 </ContentControl>
 
                 <Grid HorizontalAlignment="Right" Margin="12 0 0 0">
-                    <TextBlock Name="HealthBlockShadow" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}">
+                    <TextBlock x:Name="HealthBlockShadow" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0:0}/{1:0} ({2})">
                                 <Binding Path="Health.Current" Mode="OneWay" />
@@ -602,7 +617,7 @@
                         </TextBlock.Text>
                     </TextBlock>
 
-                    <TextBlock Name="HealthBlock" Style="{StaticResource A_Style_TextBlock_Standard}">
+                    <TextBlock x:Name="HealthBlock" Style="{StaticResource A_Style_TextBlock_Standard}">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0:0}/{1:0} ({2})">
                                 <Binding Path="Health.Current" Mode="OneWay" />
@@ -614,7 +629,7 @@
                 </Grid>
             </DockPanel>
 
-            <ContentControl Name="Bar" Content="{Binding Health.Fraction}" ContentTemplate="{StaticResource A_DataTemplate_BarProgress}" Height="3" Margin="0 2 0 0">
+            <ContentControl x:Name="Bar" Content="{Binding Health.Fraction}" ContentTemplate="{StaticResource A_DataTemplate_BarProgress}" Height="3" Margin="0 2 0 0">
                 <ContentControl.Foreground>
                     <SolidColorBrush Color="{StaticResource A_Color_Monster_Part_Bar}" />
                 </ContentControl.Foreground>
@@ -627,21 +642,21 @@
                 <Setter TargetName="Root" Property="Opacity" Value="1" />
             </Trigger>
 
-            <DataTrigger Binding="{Binding DataContext.ShowBars, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False">
+            <DataTrigger Binding="{Binding DataContext.ShowBars, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False">
                 <Setter TargetName="Bar" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
 
             <DataTrigger Binding="{Binding IsVisible}" Value="True">
                 <DataTrigger.EnterActions>
                     <StopStoryboard BeginStoryboardName="Hide" />
-                    <BeginStoryboard Name="Show" Storyboard="{StaticResource A_Storyboard_Show}" />
+                    <BeginStoryboard x:Name="Show" Storyboard="{StaticResource A_Storyboard_Show}" />
                 </DataTrigger.EnterActions>
             </DataTrigger>
 
             <DataTrigger Binding="{Binding IsVisible}" Value="False">
                 <DataTrigger.EnterActions>
                     <StopStoryboard BeginStoryboardName="Show" />
-                    <BeginStoryboard Name="Hide" Storyboard="{StaticResource A_Storyboard_Hide}" />
+                    <BeginStoryboard x:Name="Hide" Storyboard="{StaticResource A_Storyboard_Hide}" />
                 </DataTrigger.EnterActions>
             </DataTrigger>
 
@@ -649,16 +664,11 @@
                 <Setter TargetName="TimesBrokenGraphic" Property="Visibility" Value="Visible" />
             </DataTrigger>
 
-            <!--Style based on part tags example-->
-            <!--<DataTrigger Binding="{Binding Tags, Converter={StaticResource A_Converter_StringArrayContains}, ConverterParameter=Removable}" Value="True">
-                <Setter TargetName="NameBlock" Property="Foreground" Value="Red" />
-            </DataTrigger>-->
-
             <!--Show Numbers AND Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="HealthBlockShadow" Property="Text">
                     <Setter.Value>
@@ -683,8 +693,8 @@
             <!--Show Numbers NOT Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="HealthBlockShadow" Property="Text">
                     <Setter.Value>
@@ -709,8 +719,8 @@
             <!--Show NOT Numbers AND Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="HealthBlockShadow" Property="Text">
                     <Setter.Value>
@@ -735,8 +745,8 @@
             <!--Show NOT Numbers NOT Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="HealthBlockShadow" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="HealthBlock" Property="Visibility" Value="Collapsed" />
@@ -745,11 +755,11 @@
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type data:Monster}">
-        <StackPanel Name="Root" MinWidth="250" Margin="0 0 46 0" Visibility="Collapsed" Opacity="0">
+        <StackPanel x:Name="Root" Width="300" Visibility="Collapsed" Opacity="0">
             <StackPanel.Resources>
                 <CollectionViewSource x:Key="CollectionViewSource" Source="{Binding Parts}" IsLiveSortingRequested="True">
                     <CollectionViewSource.LiveSortingProperties>
-                        <system:String>IsRemovable</system:String>
+                        <system:String>Damage</system:String>
                     </CollectionViewSource.LiveSortingProperties>
                     <CollectionViewSource.SortDescriptions>
                         <wbComponentModel:SortDescription PropertyName="IsRemovable" Direction="Descending" />
@@ -757,13 +767,17 @@
                 </CollectionViewSource>
             </StackPanel.Resources>
 
+            <StackPanel.Margin>
+                <Binding Converter="{StaticResource A_Converter_NumberToCenteredMargin}" Path="DataContext.MonsterWidget.Context.Monsters.Count" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Windows:MonsterWidgetWindow}}"/>
+            </StackPanel.Margin>
+
             <StackPanel>
                 <StackPanel HorizontalAlignment="Center">
-                    <Grid Name="Crown" Height="20">
-                        <Grid Name="InnerCrown" VerticalAlignment="Bottom">
+                    <Grid x:Name="Crown" Height="20">
+                        <Grid x:Name="InnerCrown" VerticalAlignment="Bottom">
                             <ContentControl ContentTemplate="{StaticResource A_Graphic_Crown}" Background="#000000" Foreground="#000000" Opacity="0.5" RenderTransform="{StaticResource A_Transform_DropShadow}" />
 
-                            <ContentControl Name="Icon" ContentTemplate="{StaticResource A_Graphic_Crown}">
+                            <ContentControl x:Name="Icon" ContentTemplate="{StaticResource A_Graphic_Crown}">
                                 <ContentControl.Background>
                                     <SolidColorBrush Color="{StaticResource A_Color_Crown_Gold_Body}" />
                                 </ContentControl.Background>
@@ -773,22 +787,28 @@
                             </ContentControl>
                         </Grid>
                     </Grid>
-                    
+                    <!--Size-->
+                    <Grid x:Name="Size" VerticalAlignment="Bottom">
+                        <TextBlock Text="{Binding Size, StringFormat=\{0:N2\}}" Style="{StaticResource A_Style_TextBlock_Standard_Centered}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}" />
+                        <TextBlock Text="{Binding Size, StringFormat=\{0:N2\}}" Style="{StaticResource A_Style_TextBlock_Standard_Centered}" />
+                    </Grid>
+                    <!--/Size-->
                     <Grid VerticalAlignment="Bottom">
                         <TextBlock Text="{Binding Name}" Style="{StaticResource A_Style_TextBlock_Heading}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}" />
                         <TextBlock Text="{Binding Name}" Style="{StaticResource A_Style_TextBlock_Heading}" />
+
                     </Grid>
                 </StackPanel>
 
                 <Grid Margin="0 2 0 0">
-                    <ContentControl Name="HealthBar" Content="{Binding Health.Fraction}" ContentTemplate="{StaticResource A_DataTemplate_BarProgress}" Height="20">
+                    <ContentControl x:Name="HealthBar" Content="{Binding Health.Fraction}" ContentTemplate="{StaticResource A_DataTemplate_BarProgress}" Height="20">
                         <ContentControl.Foreground>
                             <SolidColorBrush Color="{StaticResource A_Color_Monster_Bar}" />
                         </ContentControl.Foreground>
                     </ContentControl>
-                    
+
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 2 0 0">
-                        <TextBlock Name="HealthBlockShadow" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}">
+                        <TextBlock x:Name="HealthBlockShadow" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{}{0:0}/{1:0} ({2})">
                                     <Binding Path="Health.Current" Mode="OneWay" />
@@ -797,7 +817,7 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <TextBlock Name="HealthBlock" Style="{StaticResource A_Style_TextBlock_Standard}">
+                        <TextBlock x:Name="HealthBlock" Style="{StaticResource A_Style_TextBlock_Standard}">
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{}{0:0}/{1:0} ({2})">
                                     <Binding Path="Health.Current" Mode="OneWay" />
@@ -810,7 +830,7 @@
                 </Grid>
             </StackPanel>
 
-            <ItemsControl Name="PartsControl" ItemsSource="{Binding Source={StaticResource CollectionViewSource}}" />
+            <ItemsControl x:Name="PartsControl" ItemsSource="{Binding Source={StaticResource CollectionViewSource}}" />
             <ItemsControl ItemsSource="{Binding StatusEffects}" />
         </StackPanel>
 
@@ -820,33 +840,36 @@
                 <Setter TargetName="Root" Property="Opacity" Value="1" />
                 <Setter TargetName="PartsControl" Property="ItemsSource" Value="{Binding Parts}" />
             </Trigger>
-            
+
             <DataTrigger Binding="{Binding IsVisible}" Value="True">
                 <DataTrigger.EnterActions>
                     <StopStoryboard BeginStoryboardName="Hide" />
-                    <BeginStoryboard Name="Show" Storyboard="{StaticResource A_Storyboard_Show}" />
+                    <BeginStoryboard x:Name="Show" Storyboard="{StaticResource A_Storyboard_Show}" />
                 </DataTrigger.EnterActions>
             </DataTrigger>
 
             <DataTrigger Binding="{Binding IsVisible}" Value="False">
                 <DataTrigger.EnterActions>
                     <StopStoryboard BeginStoryboardName="Show" />
-                    <BeginStoryboard Name="Hide" Storyboard="{StaticResource A_Storyboard_Hide}" />
+                    <BeginStoryboard x:Name="Hide" Storyboard="{StaticResource A_Storyboard_Hide}" />
                 </DataTrigger.EnterActions>
             </DataTrigger>
 
-            <DataTrigger Binding="{Binding DataContext.ShowCrown, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False">
+            <DataTrigger Binding="{Binding DataContext.ShowCrown, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False">
                 <Setter TargetName="Crown" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding DataContext.ShowBars, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False">
+            <DataTrigger Binding="{Binding DataContext.ShowBars, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False">
                 <Setter TargetName="HealthBar" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding DataContext.ShowSize, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False">
+                <Setter TargetName="Size" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
 
             <!--Show Numbers AND Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="HealthBlockShadow" Property="Text">
                     <Setter.Value>
@@ -871,8 +894,8 @@
             <!--Show Numbers NOT Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="HealthBlockShadow" Property="Text">
                     <Setter.Value>
@@ -897,8 +920,8 @@
             <!--Show NOT Numbers AND Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="HealthBlockShadow" Property="Text">
                     <Setter.Value>
@@ -923,17 +946,17 @@
             <!--Show NOT Numbers NOT Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="HealthBlockShadow" Property="Visibility" Value="Collapsed" />
                 <Setter TargetName="HealthBlock" Property="Visibility" Value="Collapsed" />
             </MultiDataTrigger>
 
-            <DataTrigger Binding="{Binding Crown, Converter={StaticResource A_Converter_EnumComparison}, ConverterParameter={x:Static data:MonsterCrown.None}}" Value="True">
+            <DataTrigger Binding="{Binding Crown, ConverterParameter={x:Static data:MonsterCrown.None}, Converter={StaticResource A_Converter_EnumComparison}}" Value="True">
                 <Setter TargetName="InnerCrown" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            <DataTrigger Binding="{Binding Crown, Converter={StaticResource A_Converter_EnumComparison}, ConverterParameter={x:Static data:MonsterCrown.Silver}}" Value="True">
+            <DataTrigger Binding="{Binding Crown, ConverterParameter={x:Static data:MonsterCrown.Silver}, Converter={StaticResource A_Converter_EnumComparison}}" Value="True">
                 <Setter TargetName="Icon" Property="Background">
                     <Setter.Value>
                         <SolidColorBrush Color="{StaticResource A_Color_Crown_Silver_Body}" />
@@ -945,7 +968,7 @@
                     </Setter.Value>
                 </Setter>
             </DataTrigger>
-            <DataTrigger Binding="{Binding Crown, Converter={StaticResource A_Converter_EnumComparison}, ConverterParameter={x:Static data:MonsterCrown.Mini}}" Value="True">
+            <DataTrigger Binding="{Binding Crown, ConverterParameter={x:Static data:MonsterCrown.Mini}, Converter={StaticResource A_Converter_EnumComparison}}" Value="True">
                 <Setter TargetName="InnerCrown" Property="Width" Value="12" />
                 <Setter TargetName="InnerCrown" Property="Height" Value="12" />
                 <Setter TargetName="Icon" Property="Background">
@@ -966,12 +989,8 @@
     <!--Team Widget Resources-->
 
     <DataTemplate DataType="{x:Type data:Player}">
-        <Grid Name="Root">
-            <ContentControl Name="Bar" Content="{Binding BarFraction}" ContentTemplate="{StaticResource A_DataTemplate_BarProgress}">
-                <ContentControl.Foreground>
-                    <SolidColorBrush Color="#000000" />
-                </ContentControl.Foreground>
-            </ContentControl>
+        <Grid x:Name="Root">
+            <ContentControl x:Name="Bar" Content="{Binding BarFraction}" ContentTemplate="{StaticResource A_DataTemplate_BarProgress}" Foreground="#000000"/>
 
             <DockPanel Margin="6 5 6 4">
                 <Grid>
@@ -979,8 +998,8 @@
                     <TextBlock Text="{Binding Name}" Style="{StaticResource A_Style_TextBlock_Standard}" />
                 </Grid>
 
-                <Grid Name="DescriptionContainer" HorizontalAlignment="Right" Margin="12 0 0 0">
-                    <TextBlock Name="DescriptionBlockShadow" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}">
+                <Grid x:Name="DescriptionContainer" HorizontalAlignment="Right" Margin="12 0 0 0">
+                    <TextBlock x:Name="DescriptionBlockShadow" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0:#,0} ({1})">
                                 <Binding Path="Damage" Mode="OneWay" />
@@ -988,7 +1007,7 @@
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
-                    <TextBlock Name="DescriptionBlock" Style="{StaticResource A_Style_TextBlock_Standard}">
+                    <TextBlock x:Name="DescriptionBlock" Style="{StaticResource A_Style_TextBlock_Standard}">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0:#,0} ({1})">
                                 <Binding Path="Damage" Mode="OneWay" />
@@ -1004,8 +1023,8 @@
             <!--Show Numbers AND Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="DescriptionBlockShadow" Property="Text">
                     <Setter.Value>
@@ -1028,8 +1047,8 @@
             <!--Show Numbers NOT Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="DescriptionBlockShadow" Property="Text">
                     <Setter.Value>
@@ -1052,8 +1071,8 @@
             <!--Show NOT Numbers AND Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="True" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="True" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="DescriptionBlockShadow" Property="Text">
                     <Setter.Value>
@@ -1076,20 +1095,20 @@
             <!--Show NOT Numbers NOT Percents-->
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
-                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowNumbers, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
+                    <Condition Binding="{Binding DataContext.ShowPercents, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False" />
                 </MultiDataTrigger.Conditions>
                 <Setter TargetName="DescriptionContainer" Property="Visibility" Value="Collapsed" />
             </MultiDataTrigger>
 
-            <DataTrigger Binding="{Binding DataContext.ShowBars, RelativeSource={RelativeSource AncestorType=ContentControl}}" Value="False">
+            <DataTrigger Binding="{Binding DataContext.ShowBars, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" Value="False">
                 <Setter TargetName="Bar" Property="Visibility" Value="Hidden" />
             </DataTrigger>
 
             <DataTrigger Binding="{Binding Damage}" Value="0">
                 <Setter TargetName="DescriptionContainer" Property="Visibility" Value="Collapsed" />
             </DataTrigger>
-            
+
             <DataTrigger Binding="{Binding ., Converter={StaticResource A_Converter_PlayerToPlayerIndex}}" Value="0">
                 <Setter TargetName="Bar" Property="Foreground">
                     <Setter.Value>
@@ -1162,7 +1181,7 @@
     </Storyboard>
 
     <DataTemplate DataType="{x:Type data:PlayerStatusEffect}">
-        <StackPanel Name="Root" Margin="0 0 0 3" Visibility="Collapsed" Opacity="0">
+        <StackPanel x:Name="Root" Margin="0 0 0 3" Visibility="Collapsed" Opacity="0">
             <StackPanel.RenderTransform>
                 <TransformGroup>
                     <TranslateTransform X="0" />
@@ -1170,10 +1189,10 @@
             </StackPanel.RenderTransform>
 
             <StackPanel Orientation="Horizontal">
-                <ContentControl Name="CircleProgress" Content="{Binding Time}" Width="14" Height="14" ContentTemplate="{StaticResource A_DataTemplate_CircleProgress}" />
+                <ContentControl x:Name="CircleProgress" Content="{Binding Time}" Width="14" Height="14" ContentTemplate="{StaticResource A_DataTemplate_CircleProgress}" />
 
                 <Grid Margin="6 2 0 0">
-                    <TextBlock Name="NameBlockShadow" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}">
+                    <TextBlock x:Name="NameBlockShadow" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0:0} ({1:0})">
                                 <Binding Path="Name" Mode="OneWay" />
@@ -1181,8 +1200,8 @@
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
-                    
-                    <TextBlock Name="NameBlock" Style="{StaticResource A_Style_TextBlock_Standard}">
+
+                    <TextBlock x:Name="NameBlock" Style="{StaticResource A_Style_TextBlock_Standard}">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0:0} ({1:0})">
                                 <Binding Path="Name" Mode="OneWay" />
@@ -1207,14 +1226,14 @@
             <DataTrigger Binding="{Binding IsVisible}" Value="True">
                 <DataTrigger.EnterActions>
                     <StopStoryboard BeginStoryboardName="Hide" />
-                    <BeginStoryboard Name="Show" Storyboard="{StaticResource A_Storyboard_Player_StatusEffect_Show}" />
+                    <BeginStoryboard x:Name="Show" Storyboard="{StaticResource A_Storyboard_Player_StatusEffect_Show}" />
                 </DataTrigger.EnterActions>
             </DataTrigger>
 
             <DataTrigger Binding="{Binding IsVisible}" Value="False">
                 <DataTrigger.EnterActions>
                     <StopStoryboard BeginStoryboardName="Show" />
-                    <BeginStoryboard Name="Hide" Storyboard="{StaticResource A_Storyboard_Player_StatusEffect_Hide}" />
+                    <BeginStoryboard x:Name="Hide" Storyboard="{StaticResource A_Storyboard_Player_StatusEffect_Hide}" />
                 </DataTrigger.EnterActions>
             </DataTrigger>
 
@@ -1236,90 +1255,90 @@
                 </Setter>
             </DataTrigger>
 
-            <DataTrigger Binding="{Binding Tags, Converter={StaticResource A_Converter_StringArrayContains}, ConverterParameter=Buff}" Value="True">
+            <DataTrigger Binding="{Binding GroupId}" Value="Horn">
                 <Setter TargetName="NameBlock" Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Buff}" />
+                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Group_Horn}" />
                     </Setter.Value>
                 </Setter>
                 <Setter TargetName="CircleProgress" Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Buff}" />
+                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Group_Horn}" />
                     </Setter.Value>
                 </Setter>
             </DataTrigger>
 
-            <DataTrigger Binding="{Binding Tags, Converter={StaticResource A_Converter_StringArrayContains}, ConverterParameter=Debuff}" Value="True">
+            <DataTrigger Binding="{Binding GroupId}" Value="Coral">
                 <Setter TargetName="NameBlock" Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Debuff}" />
+                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Group_Coral}" />
                     </Setter.Value>
                 </Setter>
                 <Setter TargetName="CircleProgress" Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Debuff}" />
+                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Group_Coral}" />
                     </Setter.Value>
                 </Setter>
             </DataTrigger>
 
-            <DataTrigger Binding="{Binding Tags, Converter={StaticResource A_Converter_StringArrayContains}, ConverterParameter=HuntingHorn}" Value="True">
+            <DataTrigger Binding="{Binding GroupId}" Value="Debuff">
                 <Setter TargetName="NameBlock" Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_HuntingHorn}" />
+                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Group_Debuff}" />
                     </Setter.Value>
                 </Setter>
                 <Setter TargetName="CircleProgress" Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_HuntingHorn}" />
+                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Group_Debuff}" />
                     </Setter.Value>
                 </Setter>
             </DataTrigger>
 
-            <DataTrigger Binding="{Binding Tags, Converter={StaticResource A_Converter_StringArrayContains}, ConverterParameter=CoralOrchestra}" Value="True">
+            <DataTrigger Binding="{Binding GroupId}" Value="Buff">
                 <Setter TargetName="NameBlock" Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_CoralOrchestra}" />
+                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Group_Buff}" />
                     </Setter.Value>
                 </Setter>
                 <Setter TargetName="CircleProgress" Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_CoralOrchestra}" />
+                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Group_Buff}" />
                     </Setter.Value>
                 </Setter>
             </DataTrigger>
 
-            <DataTrigger Binding="{Binding Tags, Converter={StaticResource A_Converter_StringArrayContains}, ConverterParameter=Equipment}" Value="True">
+            <DataTrigger Binding="{Binding GroupId}" Value="Equipment">
                 <Setter TargetName="NameBlock" Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Equipment}" />
+                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Group_Equipment}" />
                     </Setter.Value>
                 </Setter>
                 <Setter TargetName="CircleProgress" Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Equipment}" />
+                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Group_Equipment}" />
                     </Setter.Value>
                 </Setter>
             </DataTrigger>
 
-            <DataTrigger Binding="{Binding Tags, Converter={StaticResource A_Converter_StringArrayContains}, ConverterParameter=Weapon}" Value="True">
+            <DataTrigger Binding="{Binding GroupId}" Value="Weapon">
                 <Setter TargetName="NameBlock" Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Weapon}" />
+                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Group_Weapon}" />
                     </Setter.Value>
                 </Setter>
                 <Setter TargetName="CircleProgress" Property="Foreground">
                     <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Weapon}" />
+                        <SolidColorBrush Color="{StaticResource A_Color_PlayerStatusEffect_Group_Weapon}" />
                     </Setter.Value>
                 </Setter>
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>
-    
-    
+
+
     <!--Widget Controls-->
 
-    <Style x:Key="A_Style_ItemsControl_Monsters" TargetType="ItemsControl">
+    <Style x:Key="A_Style_ItemsControl_Monsters" TargetType="{x:Type ItemsControl}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -1338,12 +1357,20 @@
     </Style>
 
     <DataTemplate DataType="{x:Type widgetContexts:MonsterWidgetContext}">
-        <Grid Opacity="{StaticResource A_Double_Widget_Opacity}">
+        <Grid>
+
             <Grid.Resources>
                 <CollectionViewSource x:Key="CollectionViewSource" Source="{Binding Monsters}" />
             </Grid.Resources>
 
-            <ItemsControl Name="MonstersControl" ItemsSource="{Binding Source={StaticResource CollectionViewSource}}" Style="{StaticResource A_Style_ItemsControl_Monsters}" />
+            <Grid.Opacity>
+                <StaticResource ResourceKey="A_Double_Widget_Opacity"/>
+            </Grid.Opacity>
+            <Grid.Background>
+                <SolidColorBrush Color="{StaticResource A_Color_Widget_Background}" />
+            </Grid.Background>
+
+            <ItemsControl x:Name="MonstersControl" ItemsSource="{Binding Source={StaticResource CollectionViewSource}}" Style="{StaticResource A_Style_ItemsControl_Monsters}" />
         </Grid>
 
         <DataTemplate.Triggers>
@@ -1353,7 +1380,7 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 
-    <Style x:Key="A_Style_ItemsControl_PlayerStatusEffects" TargetType="ItemsControl">
+    <Style x:Key="A_Style_ItemsControl_PlayerStatusEffects" TargetType="{x:Type ItemsControl}">
         <Setter Property="MinWidth" Value="200" />
 
         <Setter Property="Template">
@@ -1374,7 +1401,8 @@
     </Style>
 
     <DataTemplate DataType="{x:Type widgetContexts:PlayerWidgetContext}">
-        <Grid Opacity="{StaticResource A_Double_Widget_Opacity}">
+        <Grid>
+
             <Grid.Resources>
                 <CollectionViewSource x:Key="CollectionViewSource" Source="{Binding StatusEffects}" IsLiveSortingRequested="True">
                     <CollectionViewSource.LiveSortingProperties>
@@ -1388,7 +1416,14 @@
                 </CollectionViewSource>
             </Grid.Resources>
 
-            <ItemsControl Name="StatusEffectsControl" ItemsSource="{Binding Source={StaticResource CollectionViewSource}}" Style="{StaticResource A_Style_ItemsControl_PlayerStatusEffects}" />
+            <Grid.Opacity>
+                <StaticResource ResourceKey="A_Double_Widget_Opacity"/>
+            </Grid.Opacity>
+            <Grid.Background>
+                <SolidColorBrush Color="{StaticResource A_Color_Widget_Background}" />
+            </Grid.Background>
+
+            <ItemsControl x:Name="StatusEffectsControl" ItemsSource="{Binding Source={StaticResource CollectionViewSource}}" Style="{StaticResource A_Style_ItemsControl_PlayerStatusEffects}" />
         </Grid>
 
         <DataTemplate.Triggers>
@@ -1398,7 +1433,7 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 
-    <Style x:Key="A_Style_ItemsControl_Players" TargetType="ItemsControl">
+    <Style x:Key="A_Style_ItemsControl_Players" TargetType="{x:Type ItemsControl}">
         <Setter Property="MinWidth" Value="200" />
 
         <Setter Property="Template">
@@ -1419,9 +1454,10 @@
     </Style>
 
     <DataTemplate DataType="{x:Type widgetContexts:TeamWidgetContext}">
-        <Grid Opacity="{StaticResource A_Double_Widget_Opacity}">
+        <Grid>
+
             <Grid.Resources>
-                <CollectionViewSource x:Key="CollectionViewSource" Source="{Binding Players}" IsLiveSortingRequested="True">
+                <CollectionViewSource x:Key="CollectionViewSource" Source="{Binding Fake_Players}" IsLiveSortingRequested="True">
                     <CollectionViewSource.LiveSortingProperties>
                         <system:String>Damage</system:String>
                     </CollectionViewSource.LiveSortingProperties>
@@ -1432,13 +1468,59 @@
                 </CollectionViewSource>
             </Grid.Resources>
 
-            <ItemsControl Name="PlayersControl" ItemsSource="{Binding Source={StaticResource CollectionViewSource}}" Style="{StaticResource A_Style_ItemsControl_Players}" />
+            <Grid.Opacity>
+                <StaticResource ResourceKey="A_Double_Widget_Opacity"/>
+            </Grid.Opacity>
+            <Grid.Background>
+                <SolidColorBrush Color="{StaticResource A_Color_Widget_Background}" />
+            </Grid.Background>
+
+            <ItemsControl x:Name="PlayersControl" ItemsSource="{Binding Source={StaticResource CollectionViewSource}}" Style="{StaticResource A_Style_ItemsControl_Players}" />
         </Grid>
 
         <DataTemplate.Triggers>
             <Trigger Property="pfComponentModel:DesignerProperties.IsInDesignMode" Value="True">
-                <Setter TargetName="PlayersControl" Property="ItemsSource" Value="{Binding Players}" />
+                <Setter TargetName="PlayersControl" Property="ItemsSource" Value="{Binding Fake_Players}" />
             </Trigger>
         </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type widgetContexts:DebugWidgetContext}">
+        <Grid Margin="0 23 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding CurrentGame.CurrentPlayerName, StringFormat=Player: {0:C}}" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}" />
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding CurrentGame.CurrentPlayerName, StringFormat=Player: {0:C}}" Style="{StaticResource A_Style_TextBlock_Standard}" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding CurrentGame.SessionID, StringFormat=Session ID: {0:C}}" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding CurrentGame.SessionID, StringFormat=Session ID: {0:C}}" Style="{StaticResource A_Style_TextBlock_Standard}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding CurrentGame.SessionHostPlayerName, StringFormat=Session Host: {0:C}}" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding CurrentGame.SessionHostPlayerName, StringFormat=Session Host: {0:C}}" Style="{StaticResource A_Style_TextBlock_Standard}" />
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding CurrentGame.LobbyID, StringFormat=Lobby ID: {0:C}}" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}" />
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding CurrentGame.LobbyID, StringFormat=Lobby ID: {0:C}}" Style="{StaticResource A_Style_TextBlock_Standard}" />
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding CurrentGame.LobbyHostPlayerName, StringFormat=Lobby Host: {0:C}}" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}" />
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding CurrentGame.LobbyHostPlayerName, StringFormat=Lobby Host: {0:C}}" Style="{StaticResource A_Style_TextBlock_Standard}" />
+
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding CurrentGame.EquippedWeaponType, Converter={StaticResource A_Converter_WeaponTypeToName}, StringFormat=Weapon Type: {0:C}}" Style="{StaticResource A_Style_TextBlock_Standard}" Foreground="{StaticResource A_Brush_DropShadow}" RenderTransform="{StaticResource A_Transform_DropShadow}" />
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding CurrentGame.EquippedWeaponType, Converter={StaticResource A_Converter_WeaponTypeToName}, StringFormat=Weapon Type: {0:C}}" Style="{StaticResource A_Style_TextBlock_Standard}" />
+
+            <Grid.Opacity>
+                <StaticResource ResourceKey="A_Double_Widget_Opacity"/>
+            </Grid.Opacity>
+            <Grid.Background>
+                <SolidColorBrush Color="{StaticResource A_Color_Widget_Background}" />
+            </Grid.Background>
+            
+        </Grid>
     </DataTemplate>
 </ResourceDictionary>

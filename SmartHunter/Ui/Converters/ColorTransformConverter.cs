@@ -1,4 +1,6 @@
-﻿using System.Windows.Data;
+﻿using System;
+using System.Globalization;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace SmartHunter.Ui.Converters
@@ -9,7 +11,7 @@ namespace SmartHunter.Ui.Converters
         public double BrightnessAdjustment { get; set; } = 0f;
         public double? OpacityOverride { get; set; } = null;
 
-        public object Convert(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Color? color = null;
 
@@ -65,9 +67,9 @@ namespace SmartHunter.Ui.Converters
             return Binding.DoNothing;
         }
 
-        public object ConvertBack(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         static Color HsvToColor(double hue, double saturation, double value)

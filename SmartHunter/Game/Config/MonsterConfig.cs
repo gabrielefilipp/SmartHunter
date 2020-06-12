@@ -1,4 +1,4 @@
-﻿// Monster Size Differences
+// Monster Size Differences
 // https://docs.google.com/spreadsheets/d/1zoRCvF4qKUZCgMGQw3vdtjVS-laX7-px6k1oPCJMg5E
 
 // Monster Crown Sizes
@@ -13,14 +13,15 @@ namespace SmartHunter.Game.Config
         public float BaseSize;
         public float ScaleModifier = 1f;
         public MonsterCrownConfig Crowns;
+        public bool isElder = false;
 
-        public MonsterConfig(string nameStringId, MonsterPartConfig[] parts, float baseSize, float scaleModifier, MonsterCrownConfig crowns)
+        public MonsterConfig(string nameStringId, MonsterPartConfig[] parts, float baseSize, MonsterCrownConfig crowns, bool elder = false)
         {
             NameStringId = nameStringId;
             Parts = parts;
             BaseSize = baseSize;
-            ScaleModifier = scaleModifier;
             Crowns = crowns;
+            isElder = elder;
         }
     }
 }

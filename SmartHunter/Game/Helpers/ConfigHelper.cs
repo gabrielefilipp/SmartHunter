@@ -1,4 +1,5 @@
-﻿using SmartHunter.Config;
+using System;
+using SmartHunter.Config;
 using SmartHunter.Core.Config;
 using SmartHunter.Game.Config;
 
@@ -83,14 +84,14 @@ namespace SmartHunter.Game.Helpers
         // Ensures configs are loaded
         public static void EnsureConfigs()
         {
-            var main = Main;
-            var localization = Localization;
-            var monsterData = MonsterData;
-            var playerData = PlayerData;
-            var memory = Memory;
+            _ = Main;
+            _ = Localization;
+            _ = MonsterData;
+            _ = PlayerData;
+            _ = Memory;
         }
 
-        static void Main_Loaded(object sender, System.EventArgs e)
+        static void Main_Loaded(object sender, EventArgs e)
         {
             Localization.TryChangeFileName(Main.Values.LocalizationFileName);
             MonsterData.TryChangeFileName(Main.Values.MonsterDataFileName);

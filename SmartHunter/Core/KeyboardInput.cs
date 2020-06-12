@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
 
@@ -72,10 +72,7 @@ namespace SmartHunter.Core
                 var key = KeyFromVirtualCode(keyboardData.VkCode);
                 bool isDown = keyboardMessage == WindowsApi.KeyboardMessage.WM_KEYDOWN || keyboardMessage == WindowsApi.KeyboardMessage.WM_SYSKEYDOWN;
 
-                if (InputReceived != null)
-                {
-                    InputReceived(this, new KeyboardInputEventArgs(key, isDown));
-                }
+                InputReceived?.Invoke(this, new KeyboardInputEventArgs(key, isDown));
             }
 
             return WindowsApi.CallNextHookEx(IntPtr.Zero, nCode, wParam, lParam);

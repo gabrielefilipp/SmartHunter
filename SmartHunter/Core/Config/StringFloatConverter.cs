@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Globalization;
+using Newtonsoft.Json;
 
 namespace SmartHunter.Core.Config
 {

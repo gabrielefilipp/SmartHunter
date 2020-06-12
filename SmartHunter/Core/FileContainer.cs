@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -33,7 +35,7 @@ namespace SmartHunter.Core
         {
             FileName = fileName;
 
-            bool isDesignInstance = System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime;
+            bool isDesignInstance = LicenseManager.UsageMode == LicenseUsageMode.Designtime;
             if (!isDesignInstance)
             {
                 WatchFile(true);
@@ -127,7 +129,7 @@ namespace SmartHunter.Core
 
         public static string GetFullPath()
         {
-            return Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase).Replace("file:\\", "") + "\\";
+            return Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase).Replace("file:\\", "") + "\\";
         }
 
         public static string GetFullPathFileName(string fileName)

@@ -1,0 +1,55 @@
+<windows:WidgetWindow
+        x:Class="SmartHunter.Ui.Windows.DebugWidgetWindow"                          
+        Left="{Binding DebugWidget.X, Mode=TwoWay}"
+        Top="{Binding DebugWidget.Y, Mode=TwoWay}"
+    
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+                      
+        xmlns:windows="clr-namespace:SmartHunter.Core.Windows"
+        xmlns:viewModels="clr-namespace:SmartHunter.Game.Data.ViewModels"
+    
+        Title="{Binding ConverterParameter=LOC_WIDGET_DEBUG, Converter={StaticResource A_Converter_Localizer}}"
+                      
+        d:DataContext="{x:Static viewModels:OverlayViewModel.Instance}"        
+        MouseDown="WidgetWindow_MouseDown"
+        MouseWheel="WidgetWindow_MouseWheel"
+        ShowActivated="False"        
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ShowInTaskbar="False"
+        Background="#01000000"        
+        SizeToContent="WidthAndHeight" 
+        Width="250"
+        Height="100">
+
+    <Grid Name="Root" UseLayoutRounding="True" Margin="25" MinWidth="50" MinHeight="50">
+        <Grid>
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleX="{Binding DebugWidget.Scale}" ScaleY="{Binding DebugWidget.Scale}" />
+            </Grid.LayoutTransform>
+
+            <Grid Visibility="{Binding IsVisible, Converter={StaticResource A_Converter_BoolToVisibility}}">
+                <ContentControl DataContext="{Binding DebugWidget.Context}" Content="{Binding}" />
+            </Grid>
+        </Grid>
+
+        <StackPanel DockPanel.Dock="Top" Background="#aa000000" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="{Binding CanManipulateWindows, Converter={StaticResource A_Converter_BoolToVisibility}}">
+            <TextBlock Style="{StaticResource A_Style_TextBlock_Standard}" Margin="4">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} ({3})">
+                        <Binding ConverterParameter="LOC_WIDGET_DEBUG" Converter="{StaticResource A_Converter_Localizer}" />
+                        <Binding ElementName="Root" Path="ActualWidth" />
+                        <Binding ElementName="Root" Path="ActualHeight" />
+                        <Binding Path="DebugWidget.Scale" Converter="{StaticResource A_Converter_FractionToPercentage}" Mode="OneWay" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+        </StackPanel>
+
+        <Border Visibility="{Binding CanManipulateWindows, Converter={StaticResource A_Converter_BoolToVisibility}}" BorderThickness="2" BorderBrush="Red" />
+    </Grid>
+</windows:WidgetWindow>

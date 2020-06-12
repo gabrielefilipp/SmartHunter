@@ -1,4 +1,6 @@
-﻿using System.Windows.Data;
+﻿using System;
+using System.Globalization;
+using System.Windows.Data;
 
 namespace SmartHunter.Ui.Converters
 {
@@ -17,7 +19,7 @@ namespace SmartHunter.Ui.Converters
         public bool Invert { get; set; } = false;
         public NumberComparison Comparison { get; set; } = NumberComparison.Equal;
 
-        public object Convert(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool result = false;
 
@@ -113,9 +115,9 @@ namespace SmartHunter.Ui.Converters
             return result;
         }
 
-        public object ConvertBack(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

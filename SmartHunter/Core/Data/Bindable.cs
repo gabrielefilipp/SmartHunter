@@ -16,7 +16,7 @@ namespace SmartHunter.Core.Data
         
         protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
-            if (object.Equals(storage, value))
+            if (Equals(storage, value))
             {
                 return false;
             }

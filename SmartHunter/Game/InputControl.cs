@@ -1,8 +1,9 @@
-﻿namespace SmartHunter.Game
+namespace SmartHunter.Game
 {
     public enum InputControl
     {
         ManipulateWidget,
-        HideWidgets
+        HideWidgets,
+        ToggleWidgests,
     }
 }

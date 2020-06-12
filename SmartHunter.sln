@@ -1,26 +1,39 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.106
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHunter", "SmartHunter\SmartHunter.csproj", "{F5F99CEF-1C16-48E6-A88B-1A66D3B53998}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartHunter", "SmartHunter\SmartHunter.csproj", "{F5F99CEF-1C16-48E6-A88B-1A66D3B53998}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2A20B067-F085-4EB5-8667-7E708ACE5755}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{ABF62AAC-2B01-43AB-9233-F2C3F4F746B3}"
+	ProjectSection(SolutionItems) = preProject
+		build\build.cmd = build\build.cmd
+		build\PackageRelease.ps1 = build\PackageRelease.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{AC741825-8381-4958-A594-773ED0E868FF}"
+	ProjectSection(SolutionItems) = preProject
+		doc\Config.json.md = doc\Config.json.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
-		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F5F99CEF-1C16-48E6-A88B-1A66D3B53998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F5F99CEF-1C16-48E6-A88B-1A66D3B53998}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F5F99CEF-1C16-48E6-A88B-1A66D3B53998}.Debug|x64.ActiveCfg = Debug|x64
-		{F5F99CEF-1C16-48E6-A88B-1A66D3B53998}.Debug|x64.Build.0 = Debug|x64
 		{F5F99CEF-1C16-48E6-A88B-1A66D3B53998}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5F99CEF-1C16-48E6-A88B-1A66D3B53998}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F5F99CEF-1C16-48E6-A88B-1A66D3B53998}.Release|x64.ActiveCfg = Release|x64
-		{F5F99CEF-1C16-48E6-A88B-1A66D3B53998}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

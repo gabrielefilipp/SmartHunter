@@ -1,5 +1,5 @@
-﻿using SmartHunter.Core;
-using System.Linq;
+﻿using System.Linq;
+using SmartHunter.Core;
 
 namespace SmartHunter.Game.Helpers
 {

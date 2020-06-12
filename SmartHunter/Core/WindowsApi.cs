@@ -85,7 +85,7 @@ namespace SmartHunter.Core
             public uint __alignment2;
         }
 
-        [DllImport("kernel32.dll", SetLastError = true)]
+        [DllImport("kernel32.dll")]
         public static extern int VirtualQueryEx(IntPtr hProcess, IntPtr lpAddress, out MEMORY_BASIC_INFORMATION64 lpBuffer, uint dwLength);
 
         [DllImport("kernel32.dll")]
@@ -269,10 +269,10 @@ namespace SmartHunter.Core
             DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2 = 34
         }
 
-        [DllImport("user32.dll")]
+        [DllImport("user32.dll", SetLastError = true)]
         public static extern bool SetProcessDpiAwarenessContext(int dpiFlag);
 
-        [DllImport("SHCore.dll")]
+        [DllImport("SHCore.dll", SetLastError = true)]
         public static extern bool SetProcessDpiAwareness(PROCESS_DPI_AWARENESS awareness);
 
         [DllImport("user32.dll")]

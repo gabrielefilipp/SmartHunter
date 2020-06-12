@@ -1,4 +1,5 @@
-﻿using SmartHunter.Core.Data;
+﻿using System.ComponentModel;
+using SmartHunter.Core.Data;
 using SmartHunter.Game.Helpers;
 
 namespace SmartHunter.Game.Data
@@ -15,10 +16,20 @@ namespace SmartHunter.Game.Data
             {
                 if (SetProperty(ref m_Index, value))
                 {
-                    NotifyPropertyChanged(nameof(Tags));
+                    NotifyPropertyChanged(nameof(GroupId));
                     NotifyPropertyChanged(nameof(Name));
                     NotifyPropertyChanged(nameof(IsVisible));
                 }
+            }
+        }
+
+        public ulong Address;
+
+        public string GroupId
+        {
+            get
+            {
+                return GetGroupIdFromIndex(Index);
             }
         }
 
@@ -40,25 +51,18 @@ namespace SmartHunter.Game.Data
             }
         }
 
-        public string[] Tags
-        {
-            get
-            {
-                return GetTagsFromIndex(Index);
-            }
-        }
-
         public bool IsVisible
         {
             get
             {
-                return IsIncluded(Tags) && IsTimeVisible(ConfigHelper.Main.Values.Overlay.MonsterWidget.ShowUnchangedStatusEffects, ConfigHelper.Main.Values.Overlay.MonsterWidget.HideStatusEffectsAfterSeconds);
+                return IsIncluded(GroupId) && IsTimeVisible(ConfigHelper.Main.Values.Overlay.MonsterWidget.ShowUnchangedStatusEffects, ConfigHelper.Main.Values.Overlay.MonsterWidget.HideStatusEffectsAfterSeconds);
             }
         }
 
-        public MonsterStatusEffect(Monster owner, int index, float maxBuildup, float currentBuildup, float maxDuration, float currentDuration, int timesActivatedCount)
+        public MonsterStatusEffect(Monster owner, ulong address, int index, float maxBuildup, float currentBuildup, float maxDuration, float currentDuration, int timesActivatedCount)
         {
             m_Owner = owner;
+            Address = address;
             m_Index = index;
             Buildup = new Progress(maxBuildup, currentBuildup, true);
             Duration = new Progress(maxDuration, currentDuration, true);
@@ -69,7 +73,7 @@ namespace SmartHunter.Game.Data
             Duration.PropertyChanged += Bar_PropertyChanged;
         }
 
-        private void MonsterStatusEffect_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void MonsterStatusEffect_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(TimesActivatedCount))
             {
@@ -77,19 +81,19 @@ namespace SmartHunter.Game.Data
             }
         }
 
-        private void Bar_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void Bar_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             UpdateLastChangedTime();
         }
 
-        public static string[] GetTagsFromIndex(int index)
+        public static string GetGroupIdFromIndex(int index)
         {
-            return ConfigHelper.MonsterData.Values.StatusEffects[index].Tags;
+            return ConfigHelper.MonsterData.Values.StatusEffects[index].GroupId;
         }
 
-        public static bool IsIncluded(string[] tags)
+        public static bool IsIncluded(string groupId)
         {
-            return ConfigHelper.Main.Values.Overlay.MonsterWidget.MatchStatusEffectTags(tags);
+            return ConfigHelper.Main.Values.Overlay.MonsterWidget.MatchIncludeStatusEffectGroupIdRegex(groupId);
         }
     }
 }

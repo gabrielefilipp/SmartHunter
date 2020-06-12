@@ -1,4 +1,5 @@
-﻿using SmartHunter.Core.Data;
+using System.ComponentModel;
+using SmartHunter.Core.Data;
 using SmartHunter.Game.Data.WidgetContexts;
 using SmartHunter.Game.Helpers;
 
@@ -15,7 +16,7 @@ namespace SmartHunter.Game.Data.ViewModels
                 {
                     s_Instance = new OverlayViewModel();
 
-                    bool isDesignInstance = System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime;
+                    bool isDesignInstance = LicenseManager.UsageMode == LicenseUsageMode.Designtime;
                     if (isDesignInstance || ConfigHelper.Main.Values.Debug.UseSampleData)
                     {
                         s_Instance.GenerateSampleData();
@@ -29,6 +30,7 @@ namespace SmartHunter.Game.Data.ViewModels
         public ContextualWidget<TeamWidgetContext> TeamWidget { get; private set; }
         public ContextualWidget<MonsterWidgetContext> MonsterWidget { get; private set; }
         public ContextualWidget<PlayerWidgetContext> PlayerWidget { get; private set; }
+        public ContextualWidget<DebugWidgetContext> DebugWidget { get; private set; }
 
         bool m_CanManipulateWindows;
         public bool CanManipulateWindows
@@ -50,7 +52,7 @@ namespace SmartHunter.Game.Data.ViewModels
             }
         }
 
-        bool m_IsGameActive = true;
+        bool m_IsGameActive = false;
         public bool IsGameActive
         {
             get { return m_IsGameActive; }
@@ -76,10 +78,12 @@ namespace SmartHunter.Game.Data.ViewModels
             TeamWidget = new ContextualWidget<TeamWidgetContext>(ConfigHelper.Main.Values.Overlay.TeamWidget, new TeamWidgetContext());
             MonsterWidget = new ContextualWidget<MonsterWidgetContext>(ConfigHelper.Main.Values.Overlay.MonsterWidget, new MonsterWidgetContext());
             PlayerWidget = new ContextualWidget<PlayerWidgetContext>(ConfigHelper.Main.Values.Overlay.PlayerWidget, new PlayerWidgetContext());
+            DebugWidget = new ContextualWidget<DebugWidgetContext>(ConfigHelper.Main.Values.Overlay.DebugWidget, new DebugWidgetContext());
         }
 
         void GenerateSampleData()
         {
+            /*
             TeamWidget.Context.UpdateAndGetPlayer(0, "Jade", 3244);
             TeamWidget.Context.UpdateAndGetPlayer(1, "Kabuto", 2182);
             TeamWidget.Context.UpdateAndGetPlayer(2, "mike the father", 569);
@@ -180,6 +184,7 @@ namespace SmartHunter.Game.Data.ViewModels
 
             //// Mega Demondrug
             //PlayerWidget.Context.UpdateAndGetPlayerStatusEffect(80, null, true);
+            */
         }
     }    
 }
