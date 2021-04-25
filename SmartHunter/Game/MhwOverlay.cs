@@ -19,6 +19,11 @@ namespace SmartHunter.Game
     public class MhwOverlay : Overlay
     {
         MhwMemoryUpdater m_MemoryUpdater;
+        bool HideWidgets
+        {
+            get;
+            set;
+        }
 
         public MhwOverlay(Window mainWindow, params WidgetWindow[] widgetWindows) : base(mainWindow, widgetWindows)
         {
@@ -26,6 +31,8 @@ namespace SmartHunter.Game
             ConfigHelper.Localization.Loaded += (s, e) => { RefreshWidgetsLayout(); };
             ConfigHelper.MonsterData.Loaded += (s, e) => { RefreshWidgetsLayout(); };
             ConfigHelper.PlayerData.Loaded += (s, e) => { RefreshWidgetsLayout(); };
+
+            HideWidgets = false;
 
             if (!ConfigHelper.Main.Values.Debug.UseSampleData)
             {
@@ -78,7 +85,18 @@ namespace SmartHunter.Game
             }
             else if (control == InputControl.HideWidgets)
             {
-                OverlayViewModel.Instance.HideWidgetsRequested = isDown;
+                if (ConfigHelper.Main.Values.Overlay.HideOverlayToggle == true)
+                {
+                    if (isDown)
+                    {
+                        HideWidgets = !HideWidgets;
+                    }
+                    OverlayViewModel.Instance.HideWidgetsRequested = HideWidgets;
+                }
+                else
+                {
+                    OverlayViewModel.Instance.HideWidgetsRequested = isDown;
+                }
             }
             else if (control == InputControl.CopyTeamDamage && isDown)
             {

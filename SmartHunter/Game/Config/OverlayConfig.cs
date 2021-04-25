@@ -7,6 +7,7 @@ namespace SmartHunter.Game.Config
         public float ScaleStep = 0.1f;
         public bool HideWhenGameWindowIsInactive = false;
         public int UpdatesPerSecond = 20;
+        public bool HideOverlayToggle = false;
 
         public TeamWidgetConfig TeamWidget = new TeamWidgetConfig(220, 220);
         public MonsterWidgetConfig MonsterWidget = new MonsterWidgetConfig(320, 120);
