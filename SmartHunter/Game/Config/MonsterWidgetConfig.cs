@@ -18,6 +18,7 @@ namespace SmartHunter.Game.Config
 
         public bool ShowSize = true;
         public bool ShowCrown = true;
+        public bool ShowWeakness = true;
         public bool ShowBars = true;
         public bool ShowNumbers = true;
         public bool ShowPercents = false;
